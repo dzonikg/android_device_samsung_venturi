@@ -34,7 +34,6 @@ else
 fi
 
 DIRS="
-vendor/bin
 bin
 cameradata
 etc/wifi
@@ -42,8 +41,10 @@ lib/egl
 lib/hw
 media
 firmware
+vendor/bin
 vendor/firmware
 vendor/etc
+vendor/lib
 "
 
 for DIR in $DIRS; do
@@ -95,32 +96,32 @@ lib/libsecril-client.so
 etc/gps.conf
 vendor/bin/gpsd
 vendor/etc/gps.xml
-lib/hw/gps.s5pc110.so
+vendor/lib/hw/gps.s5pc110.so
 
 bin/pvrsrvinit
-lib/egl/libEGL_POWERVR_SGX540_120.so
-lib/egl/libGLES_android.so
-lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
-lib/egl/libGLESv2_POWERVR_SGX540_120.so
-lib/libsrv_um.so
-lib/libsrv_init.so
-lib/libIMGegl.so
-lib/libpvr2d.so
-lib/libpvrANDROID_WSEGL.so
-lib/libglslcompiler.so
-lib/libPVRScopeServices.so
-lib/libusc.so
+vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
+vendor/lib/egl/libGLES_android.so
+vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
+vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
+vendor/lib/libsrv_um.so
+vendor/lib/libsrv_init.so
+vendor/lib/libIMGegl.so
+vendor/lib/libpvr2d.so
+vendor/lib/libpvrANDROID_WSEGL.so
+vendor/lib/libglslcompiler.so
+vendor/lib/libPVRScopeServices.so
+vendor/lib/libusc.so
 vendor/firmware/samsung_mfc_fw.bin 
 
-bin/geomagneticd
-bin/orientationd
-lib/libsensorservice.so
-lib/libsensor_yamaha_test.so
-lib/hw/sensors.default.so
-lib/hw/gralloc.s5pc110.so
-lib/hw/copybit.s5pc110.so
-lib/hw/lights.s5pc110.so
-lib/hw/overlay.s5pc110.so
+vendor/bin/geomagneticd
+vendor/bin/orientationd
+vendor/lib/libsensorservice.so
+vendor/lib/libsensor_yamaha_test.so
+vendor/lib/hw/sensors.default.so
+vendor/lib/hw/gralloc.s5pc110.so
+vendor/lib/hw/copybit.s5pc110.so
+vendor/lib/hw/lights.s5pc110.so
+vendor/lib/hw/overlay.s5pc110.so
 
 bin/playlpm
 bin/charging_mode
@@ -197,33 +198,33 @@ PRODUCT_COPY_FILES += \\
 #
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/pvrsrvinit:system/bin/pvrsrvinit \\
-    vendor/samsung/__DEVICE__/proprietary/lib/egl/libEGL_POWERVR_SGX540_120.so:system/lib/egl/libEGL_POWERVR_SGX540_120.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so:system/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLESv2_POWERVR_SGX540_120.so:system/lib/egl/libGLESv2_POWERVR_SGX540_120.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsrv_um.so:system/lib/libsrv_um.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsrv_init.so:system/lib/libsrv_init.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libIMGegl.so:system/lib/libIMGegl.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libpvr2d.so:system/lib/libpvr2d.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libpvrANDROID_WSEGL.so:system/lib/libpvrANDROID_WSEGL.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libglslcompiler.so:system/lib/libglslcompiler.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libPVRScopeServices.so:system/lib/libPVRScopeServices.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libusc.so:system/lib/libusc.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLES_android.so:system/vendor/lib/egl/libGLES_android.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_um.so:system/vendor/lib/libsrv_um.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_init.so:system/vendor/lib/libsrv_init.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libIMGegl.so:system/vendor/lib/libIMGegl.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libpvr2d.so:system/vendor/lib/libpvr2d.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libpvrANDROID_WSEGL.so:system/vendor/lib/libpvrANDROID_WSEGL.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libglslcompiler.so:system/vendor/lib/libglslcompiler.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libPVRScopeServices.so:system/vendor/lib/libPVRScopeServices.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libusc.so:system/vendor/lib/libusc.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/firmware/samsung_mfc_fw.bin:system/vendor/firmware/samsung_mfc_fw.bin
 
 #
 # Sensors, Lights etc
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/geomagneticd:system/bin/geomagneticd \\
-    vendor/samsung/__DEVICE__/proprietary/bin/orientationd:system/bin/orientationd \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/sensors.default.so:system/lib/hw/sensors.default.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsensor_yamaha_test.so:system/lib/libsensor_yamaha_test.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/libsensorservice.so:system/lib/libsensorservice.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/copybit.s5pc110.so:system/lib/hw/copybit.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/lights.s5pc110.so:system/lib/hw/lights.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/overlay.s5pc110.so:system/lib/hw/overlay.s5pc110.so
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/gralloc.s5pc110.so:system/lib/hw/gralloc.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/vendor/bin/geomagneticd:system/vendor/bin/geomagneticd \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/bin/orientationd:system/vendor/bin/orientationd \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/sensors.default.so:system/vendor/lib/hw/sensors.default.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsensor_yamaha_test.so:system/vendor/lib/libsensor_yamaha_test.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsensorservice.so:system/vendor/lib/libsensorservice.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/copybit.s5pc110.so:system/vendor/lib/hw/copybit.s5pc110.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/lights.s5pc110.so:system/vendor/lib/hw/lights.s5pc110.so \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/overlay.s5pc110.so:system/vendor/lib/hw/overlay.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/gralloc.s5pc110.so:system/vendor/lib/hw/gralloc.s5pc110.so
 
 #
 # Bluetooth
@@ -281,7 +282,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/vendor/bin/gpsd:system/vendor/bin/gpsd \\
     vendor/samsung/__DEVICE__/proprietary/vendor/etc/gps.xml:system/vendor/etc/gps.xml \\
     vendor/samsung/__DEVICE__/proprietary/etc/gps.conf:system/etc/gps.conf \\
-    vendor/samsung/__DEVICE__/proprietary/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
 
 #
 # Files for battery charging screen
