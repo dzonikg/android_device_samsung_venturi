@@ -19,7 +19,7 @@
 
 $(call inherit-product, vendor/samsung/venturi_usa/venturi_usa-vendor.mk)
 $(call inherit-product, build/target/product/full_base.mk)
-$(call inherit-product, vendor/cm/config/common_full_tablet_wifionly.mk)
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 DEVICE_PACKAGE_OVERLAYS := device/samsung/venturi_usa/overlay
 DEVICE_PACKAGE_OVERLAYS += device/samsung/venturi_usa/overlay
