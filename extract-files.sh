@@ -100,7 +100,7 @@ vendor/lib/hw/gps.s5pc110.so
 
 bin/pvrsrvinit
 vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
-vendor/lib/egl/libGLES_android.so
+lib/egl/libGLES_android.so
 vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
 vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
 vendor/lib/libsrv_um.so
@@ -199,7 +199,7 @@ PRODUCT_COPY_FILES += \\
 PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/bin/pvrsrvinit:system/bin/pvrsrvinit \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLES_android.so:system/vendor/lib/egl/libGLES_android.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsrv_um.so:system/vendor/lib/libsrv_um.so \\
@@ -282,7 +282,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/vendor/bin/gpsd:system/vendor/bin/gpsd \\
     vendor/samsung/__DEVICE__/proprietary/vendor/etc/gps.xml:system/vendor/etc/gps.xml \\
     vendor/samsung/__DEVICE__/proprietary/etc/gps.conf:system/etc/gps.conf \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/gps.s5pc110.so:system/lib/hw/gps.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/gps.s5pc110.so:system/vendor/lib/hw/gps.s5pc110.so
 
 #
 # Files for battery charging screen
