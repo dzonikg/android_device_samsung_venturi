@@ -223,7 +223,7 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/libsensorservice.so:system/vendor/lib/libsensorservice.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/copybit.s5pc110.so:system/vendor/lib/hw/copybit.s5pc110.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/lights.s5pc110.so:system/vendor/lib/hw/lights.s5pc110.so \\
-    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/overlay.s5pc110.so:system/vendor/lib/hw/overlay.s5pc110.so
+    vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/overlay.s5pc110.so:system/vendor/lib/hw/overlay.s5pc110.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/hw/gralloc.s5pc110.so:system/vendor/lib/hw/gralloc.s5pc110.so
 
 #
