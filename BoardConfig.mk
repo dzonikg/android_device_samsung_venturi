@@ -20,8 +20,11 @@
 
 # Set this up here so that BoardVendorConfig.mk can override it
 BOARD_USES_GENERIC_AUDIO := false
-
+USE_CAMERA_STUB := true
 BOARD_USES_LIBSECRIL_STUB := true
+
+# Use the non-open-source parts, if they're present
+-include vendor/samsung/venturi_usa/BoardConfigVendor.mk
 
 # ARMv7-A Cortex-A8 architecture
 TARGET_CPU_ABI := armeabi-v7a
@@ -77,7 +80,6 @@ WIFI_DRIVER_FW_STA_PATH := "/system/etc/wifi/bcm4329_sta.bin"
 WIFI_DRIVER_MODULE_NAME := "dhd"
 #BOARD_WEXT_NO_COMBO_SCAN := true
 
-USE_CAMERA_STUB := true
 ifeq ($(USE_CAMERA_STUB),false)
 BOARD_CAMERA_LIBRARIES := libcamera
 endif
@@ -110,6 +112,3 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi_usa/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 TARGET_OTA_ASSERT_DEVICE := venturi_usa,YP-G70
-
-# Use the non-open-source parts, if they're present
--include vendor/samsung/venturi_usa/BoardConfigVendor.mk

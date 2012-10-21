@@ -38,13 +38,14 @@ bin
 cameradata
 etc/wifi
 lib/egl
-lib/hw
 media
 firmware
 vendor/bin
 vendor/firmware
 vendor/etc
 vendor/lib
+vendor/lib/egl
+vendor/lib/hw
 "
 
 for DIR in $DIRS; do
