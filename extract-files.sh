@@ -149,6 +149,61 @@ media/battery_charging_95.qmg
 media/battery_charging_100.qmg
 media/chargingwarning.qmg
 media/Disconnected.qmg
+
+usr/share/alsa/cards/aliases.conf
+usr/share/alsa/pcm/center_lfe.conf
+usr/share/alsa/pcm/default.conf
+usr/share/alsa/pcm/dmix.conf
+usr/share/alsa/pcm/dpl.conf
+usr/share/alsa/pcm/dsnoop.conf
+usr/share/alsa/pcm/front.conf
+usr/share/alsa/pcm/iec958.conf
+usr/share/alsa/pcm/modem.conf
+usr/share/alsa/pcm/rear.conf
+usr/share/alsa/pcm/side.conf
+usr/share/alsa/pcm/surround40.conf
+usr/share/alsa/pcm/surround41.conf
+usr/share/alsa/pcm/surround50.conf
+usr/share/alsa/pcm/surround51.conf
+usr/share/alsa/pcm/surround71.conf
+usr/share/alsa/alsa.conf
+
+lib/libaudiohw_op.so
+lib/libaudiohw_sf.so
+lib/liblvvefs.so
+lib/lib_Samsung_Sound_Booster_Handphone.so
+lib/lib_Samsung_Resampler.so
+lib/libsamsungSoundbooster.so
+lib/libsec-ril.so
+lib/liba2dp.so
+lib/libsecril-client.so
+etc/audio/aeqcoe.txt
+etc/audio/aeqcoe_ulp.txt
+etc/audio/aeqcoe_voip_rx_ear.txt
+etc/audio/aeqcoe_voip_rx_head.txt
+etc/audio/aeqcoe_voip_rx_spk.txt
+etc/audio/aeqcoe_voip_tx.txt
+etc/audio/aeqcoe_voip_tx_qik.txt
+etc/audio/eur_situation.txt
+etc/audio/eur_stream_earpiece.txt
+etc/audio/eur_stream_headset.txt
+etc/audio/eur_stream_speaker.txt
+etc/audio/LVVEFS_Rx_Configuration.txt
+etc/audio/LVVEFS_Tx_Configuration.txt
+etc/audio/Rx_ControlParams_EARPIECE_WIDEBAND.txt
+etc/audio/Rx_ControlParams_SPEAKER_WIDEBAND.txt
+etc/audio/Rx_ControlParams_WIRED_HEADPHONE_WIDEBAND.txt
+etc/audio/Rx_ControlParams_WIRED_HEADSET_WIDEBAND.txt
+etc/audio/situation.txt
+etc/audio/soundbooster.txt
+etc/audio/srstunning.txt
+etc/audio/stream_earpiece.txt
+etc/audio/stream_headset.txt
+etc/audio/stream_speaker.txt
+etc/audio/Tx_ControlParams_EARPIECE_WIDEBAND.txt
+etc/audio/Tx_ControlParams_SPEAKER_WIDEBAND.txt
+etc/audio/Tx_ControlParams_WIRED_HEADPHONE_WIDEBAND.txt
+etc/audio/Tx_ControlParams_WIRED_HEADSET_WIDEBAND.txt
 "
 
 for FILE in $FILES; do
@@ -314,6 +369,70 @@ PRODUCT_COPY_FILES += \\
     vendor/samsung/__DEVICE__/proprietary/media/battery_charging_100.qmg:system/media/battery_charging_100.qmg \\
     vendor/samsung/__DEVICE__/proprietary/media/chargingwarning.qmg:system/media/chargingwarning.qmg \\
     vendor/samsung/__DEVICE__/proprietary/media/Disconnected.qmg:system/media/Disconnected.qmg
+
+#
+# Yo dawg I heard you like ALSA files
+#
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf \\
+    vendor/samsung/__DEVICE__/proprietary/usr/share/alsa/alsa.conf:system/usr/share/alsa/alsa.conf
+
+
+#
+# Sound libs and other prop files
+#
+PRODUCT_COPY_FILES += \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libaudiohw_op.so:system/lib/libaudiohw_op.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libaudiohw_sf.so:system/lib/libaudiohw_sf.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/liblvvefs.so:system/lib/liblvvefs.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/lib_Samsung_Sound_Booster_Handphone.so:system/lib/lib_Samsung_Sound_Booster_Handphone.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/lib_Samsung_Resampler.so:system/lib/lib_Samsung_Resampler.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsamsungSoundbooster.so:system/lib/libsamsungSoundbooster.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsec-ril.so:system/lib/libsec-ril.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/liba2dp.so:system/lib/liba2dp.so \\
+    vendor/samsung/__DEVICE__/proprietary/lib/libsecril-client.so:system/lib/libsecril-client.so \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/aeqcoe.txt:system/etc/audio/aeqcoe.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/aeqcoe_ulp.txt:system/etc/audio/aeqcoe_ulp.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/aeqcoe_voip_rx_ear.txt:system/etc/audio/aeqcoe_voip_rx_ear.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/aeqcoe_voip_rx_head.txt:system/etc/audio/aeqcoe_voip_rx_head.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/aeqcoe_voip_rx_spk.txt:system/etc/audio/aeqcoe_voip_rx_spk.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/aeqcoe_voip_tx.txt:system/etc/audio/aeqcoe_voip_tx.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/aeqcoe_voip_tx_qik.txt:system/etc/audio/aeqcoe_voip_tx_qik.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/eur_situation.txt:system/etc/audio/eur_situation.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/eur_stream_earpiece.txt:system/etc/audio/eur_stream_earpiece.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/eur_stream_headset.txt:system/etc/audio/eur_stream_headset.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/eur_stream_speaker.txt:system/etc/audio/eur_stream_speaker.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/LVVEFS_Rx_Configuration.txt:system/etc/audio/LVVEFS_Rx_Configuration.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/LVVEFS_Tx_Configuration.txt:system/etc/audio/LVVEFS_Tx_Configuration.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Rx_ControlParams_EARPIECE_WIDEBAND.txt:system/etc/audio/Rx_ControlParams_EARPIECE_WIDEBAND.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Rx_ControlParams_SPEAKER_WIDEBAND.txt:system/etc/audio/Rx_ControlParams_SPEAKER_WIDEBAND.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Rx_ControlParams_WIRED_HEADPHONE_WIDEBAND.txt:system/etc/audio/Rx_ControlParams_WIRED_HEADPHONE_WIDEBAND.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Rx_ControlParams_WIRED_HEADSET_WIDEBAND.txt:system/etc/audio/Rx_ControlParams_WIRED_HEADSET_WIDEBAND.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/situation.txt:system/etc/audio/situation.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/soundbooster.txt:system/etc/audio/soundbooster.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/srstunning.txt:system/etc/audio/srstunning.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/stream_earpiece.txt:system/etc/audio/stream_earpiece.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/stream_headset.txt:system/etc/audio/stream_headset.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/stream_speaker.txt:system/etc/audio/stream_speaker.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Tx_ControlParams_EARPIECE_WIDEBAND.txt:system/etc/audio/Tx_ControlParams_EARPIECE_WIDEBAND.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Tx_ControlParams_SPEAKER_WIDEBAND.txt:system/etc/audio/Tx_ControlParams_SPEAKER_WIDEBAND.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Tx_ControlParams_WIRED_HEADPHONE_WIDEBAND.txt:system/etc/audio/Tx_ControlParams_WIRED_HEADPHONE_WIDEBAND.txt \\
+    vendor/samsung/__DEVICE__/proprietary/etc/audio/Tx_ControlParams_WIRED_HEADSET_WIDEBAND.txt:system/etc/audio/Tx_ControlParams_WIRED_HEADSET_WIDEBAND.txt
 
 EOF
 
