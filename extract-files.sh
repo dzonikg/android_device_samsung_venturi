@@ -99,7 +99,7 @@ vendor/bin/gpsd
 vendor/etc/gps.xml
 vendor/lib/hw/gps.s5pc110.so
 
-bin/pvrsrvinit
+vendor/bin/pvrsrvinit
 vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
 lib/egl/libGLES_android.so
 vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
@@ -198,7 +198,7 @@ PRODUCT_COPY_FILES += \\
 # Display (3D)
 #
 PRODUCT_COPY_FILES += \\
-    vendor/samsung/__DEVICE__/proprietary/bin/pvrsrvinit:system/bin/pvrsrvinit \\
+    vendor/samsung/__DEVICE__/proprietary/vendor/bin/pvrsrvinit:system/vendor/bin/pvrsrvinit \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so:system/vendor/lib/egl/libEGL_POWERVR_SGX540_120.so \\
     vendor/samsung/__DEVICE__/proprietary/lib/egl/libGLES_android.so:system/lib/egl/libGLES_android.so \\
     vendor/samsung/__DEVICE__/proprietary/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so:system/vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so \\
