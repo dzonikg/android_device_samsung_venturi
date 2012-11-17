@@ -43,6 +43,9 @@ PRODUCT_PACKAGES += \
 # Init files
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi_usa/init.venturi.rc:root/init.venturi.rc \
+	device/samsung/venturi_usa/init.venturi.usb.rc:root/init.venturi.rc \
+	device/samsung/venturi_usa/init.usb.rc:root/init.venturi.rc \
+	device/samsung/venturi_usa/init.trace.rc:root/init.venturi.rc \
 	device/samsung/venturi_usa/lpm.rc:root/lpm.rc \
 	device/samsung/venturi_usa/ueventd.rc:root/ueventd.rc \
 	device/samsung/venturi_usa/ueventd.venturi.rc:root/ueventd.venturi.rc
