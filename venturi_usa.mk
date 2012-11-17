@@ -35,23 +35,17 @@ PRODUCT_PACKAGES += \
     audio.primary.s5pc110 \
     libaudiohw_legacy \
     audio.a2dp.default \
+    audio.usb.default \
     hwcomposer.s5pc110 \
     Torch \
     libaudioutils
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi_usa/init.smdkc110.rc:root/init.smdkc110.rc \
+	device/samsung/venturi_usa/init.venturi.rc:root/init.venturi.rc \
 	device/samsung/venturi_usa/lpm.rc:root/lpm.rc \
 	device/samsung/venturi_usa/ueventd.rc:root/ueventd.rc \
-	device/samsung/venturi_usa/ueventd.smdkc110.rc:root/ueventd.smdkc110.rc
-
-# Horrific hack is horrific (makes it so we don't have to add the boot and ext4 files after zip creation)
-#PRODUCT_COPY_FILES += \
-#	device/samsung/venturi_usa/zipstuff/cm7boot.img:system/etc/bootutils/cm7boot.img \
-#	device/samsung/venturi_usa/zipstuff/make_ext4fs:system/etc/bootutils/make_ext4fs \
-#	device/samsung/venturi_usa/zipstuff/updater.sh:system/etc/bootutils/updater.sh \
-#	device/samsung/venturi_usa/zipstuff/busybox:system/etc/bootutils/busybox
+	device/samsung/venturi_usa/ueventd.venturi.rc:root/ueventd.venturi.rc
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -125,7 +119,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-       wifi.interface=eth0 \
+       wifi.interface=wlan0 \
        wifi.supplicant_scan_interval=15 \
        dalvik.vm.heapsize=128m
 
@@ -146,27 +140,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# kernel modules for ramdisk
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/venturi_usa/modules/ramdisk,root/lib/modules)
-
-PRODUCT_COPY_FILES += \
-    $(call find-copy-subdir-files,*,device/samsung/venturi_usa/modules/ramdisk,recovery/root/lib/modules)
-
-# kernel modules
-PRODUCT_COPY_FILES += $(foreach module,\
-	$(wildcard device/samsung/venturi_usa/modules/*.ko),\
-	$(module):system/lib/modules/$(notdir $(module)))
-
-ifeq ($(TARGET_PREBUILT_KERNEL),)
-    LOCAL_KERNEL := device/samsung/venturi_usa/kernel
-else
-    LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
-endif
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_KERNEL):kernel
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care

@@ -53,13 +53,6 @@ TARGET_BOOTLOADER_BOARD_NAME := s5pc110
 TARGET_PROVIDES_LIBAUDIO := true
 BOARD_USES_AUDIO_LEGACY := true
 
-#TARGET_RELEASETOOLS_EXTENSIONS := device/samsung/venturi_usa/releasetools/
-#TARGET_PROVIDES_RELEASETOOLS := true
-
-# Releasetools
-#TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/venturi_usa/releasetools/venturi_usa_ota_from_target_files
-#TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/venturi_usa/releasetools/venturi_usa_img_from_target_files
-
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -73,7 +66,7 @@ BOARD_WPA_SUPPLICANT_DRIVER := WEXT
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_wext
 BOARD_WLAN_DEVICE := bcm4329
-WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/dhd.ko"
+WIFI_DRIVER_MODULE_PATH := "/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcm4329_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_FW_AP_PATH := "/system/etc/wifi/bcm4329_aps.bin"
 WIFI_DRIVER_FW_STA_PATH := "/system/etc/wifi/bcm4329_sta.bin"
@@ -95,7 +88,7 @@ BOARD_EGL_CFG := device/samsung/venturi_usa/prebuilt/lib/egl/egl.cfg
 BOARD_KERNEL_BASE := 0x32000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
-TARGET_PREBUILT_KERNEL := device/samsung/venturi_usa/kernel
+TARGET_KERNEL_CONFIG := venturi_usa_defconfig
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 47864320
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 304087040
@@ -104,11 +97,11 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Vold
 BOARD_VOLD_MAX_PARTITIONS := 17
-#BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi_usa/shbootimg.mk
+BOARD_HAS_NO_SELECT_BUTTON := false
+#BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi_usa/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 TARGET_OTA_ASSERT_DEVICE := venturi_usa,YP-G70
