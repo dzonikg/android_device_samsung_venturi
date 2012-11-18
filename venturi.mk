@@ -15,21 +15,17 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-#DEVICE_PACKAGE_OVERLAYS := device/samsung/aries-common/overlay
 
-$(call inherit-product, vendor/samsung/venturi_usa/venturi_usa-vendor.mk)
+$(call inherit-product, vendor/samsung/venturi/venturi-vendor.mk)
 $(call inherit-product, build/target/product/full_base.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-DEVICE_PACKAGE_OVERLAYS := device/samsung/venturi_usa/overlay
-DEVICE_PACKAGE_OVERLAYS += device/samsung/venturi_usa/overlay
-
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi_usa/asound.conf:system/etc/asound.conf \
-	device/samsung/venturi_usa/vold.fstab:system/etc/vold.fstab \
-	device/samsung/venturi_usa/vold.conf:system/etc/vold.conf \
-	device/samsung/venturi_usa/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
+	device/samsung/venturi/prebuilt/etc/asound.conf:system/etc/asound.conf \
+	device/samsung/venturi/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
+	device/samsung/venturi/prebuilt/etc/vold.conf:system/etc/vold.conf \
+	device/samsung/venturi/prebuilt/lib/egl/egl.cfg:system/lib/egl/egl.cfg
 
 PRODUCT_PACKAGES += \
     audio.primary.s5pc110 \
@@ -42,13 +38,13 @@ PRODUCT_PACKAGES += \
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi_usa/init.venturi.rc:root/init.venturi.rc \
-	device/samsung/venturi_usa/init.venturi.usb.rc:root/init.venturi.rc \
-	device/samsung/venturi_usa/init.usb.rc:root/init.venturi.rc \
-	device/samsung/venturi_usa/init.trace.rc:root/init.venturi.rc \
-	device/samsung/venturi_usa/lpm.rc:root/lpm.rc \
-	device/samsung/venturi_usa/ueventd.rc:root/ueventd.rc \
-	device/samsung/venturi_usa/ueventd.venturi.rc:root/ueventd.venturi.rc
+	device/samsung/venturi/initramfs/init.venturi.rc:root/init.venturi.rc \
+	device/samsung/venturi/initramfs/init.venturi.usb.rc:root/init.venturi.rc \
+	device/samsung/venturi/initramfs/init.usb.rc:root/init.venturi.rc \
+	device/samsung/venturi/initramfs/init.trace.rc:root/init.venturi.rc \
+	device/samsung/venturi/initramfs/lpm.rc:root/lpm.rc \
+	device/samsung/venturi/initramfs/ueventd.rc:root/ueventd.rc \
+	device/samsung/venturi/initramfs/ueventd.venturi.rc:root/ueventd.venturi.rc
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -60,15 +56,15 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi_usa/audio/libasound.so:system/lib/libasound.so \
-	device/samsung/venturi_usa/audio/libaudio.so:system/lib/libaudio.so \
-	device/samsung/venturi_usa/audio/libaudiopolicy.so:system/lib/libaudiopolicy.so \
+	device/samsung/venturi/audio/libasound.so:system/lib/libasound.so \
+	device/samsung/venturi/audio/libaudio.so:system/lib/libaudio.so \
+	device/samsung/venturi/audio/libaudiopolicy.so:system/lib/libaudiopolicy.so
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi_usa/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
-	device/samsung/venturi_usa/cytma340_input.idc:system/usr/idc/cytma340_input.idc \
-	device/samsung/venturi_usa/cytma340_input.kl:system/usr/keylayout/cytma340_input.kl
+	device/samsung/venturi/prebuilt/usr/keylayout/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
+	device/samsung/venturi/prebuilt/usr/idc/cytma340_input.idc:system/usr/idc/cytma340_input.idc \
+	device/samsung/venturi/prebuilt/usr/keylayout/cytma340_input.kl:system/usr/keylayout/cytma340_input.kl
 
 # Generated kcm keymaps
 PRODUCT_PACKAGES := \
@@ -76,13 +72,13 @@ PRODUCT_PACKAGES := \
        s3c-keypad.kcm
 
 # Filesystem management tools
-PRODUCT_PACKAGES += \
-	make_ext4fs \
-	setup_fs
+#PRODUCT_PACKAGES += \
+#	make_ext4fs \
+#	setup_fs
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi_usa/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
+	device/samsung/venturi/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # Libs
 PRODUCT_PACKAGES += \
@@ -148,4 +144,4 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
 # commonly available
-$(call inherit-product, vendor/samsung/venturi_usa/venturi_usa-vendor.mk)
+$(call inherit-product, vendor/samsung/venturi/venturi-vendor.mk)

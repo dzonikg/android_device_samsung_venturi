@@ -6,17 +6,16 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 # Inherit device configuration
-$(call inherit-product, device/samsung/venturi_usa/venturi_usa.mk)
+$(call inherit-product, device/samsung/venturi/venturi.mk)
 
 # Inherit our vendor files dawg
-$(call inherit-product, vendor/samsung/venturi_usa/venturi_usa-vendor.mk)
+$(call inherit-product, vendor/samsung/venturi/venturi-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS := device/samsung/venturi_usa/overlay
-DEVICE_PACKAGE_OVERLAYS += device/samsung/venturi_usa/overlay
+DEVICE_PACKAGE_OVERLAYS := device/samsung/venturi/overlay
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := cm_venturi_usa
-PRODUCT_DEVICE := venturi_usa
+PRODUCT_NAME := cm_venturi
+PRODUCT_DEVICE := venturi
 PRODUCT_BRAND := Android
 PRODUCT_MANUFACTURER := Samsung
 PRODUCT_MODEL := YP-G70

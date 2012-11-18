@@ -1,5 +1,5 @@
 #
-# system.prop for venturi_usa
+# system.prop for venturi
 #
 
 rild.libpath=/system/lib/libsec-ril-apalone.so
