@@ -1,5 +1,5 @@
 import init.venturi.usb.rc
-#import init.aries.gps.rc
+#import init.venturi.gps.rc
 
 on init
     loglevel 9
@@ -25,8 +25,8 @@ on init
 on boot
     mount debugfs /sys/kernel/debug /sys/kernel/debug
 
-    setprop ro.build.product aries
-    setprop ro.product.device aries
+    setprop ro.build.product venturi
+    setprop ro.product.device venturi
     setprop ro.radio.noril yes
 
 # fake some battery state
