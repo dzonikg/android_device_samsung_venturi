@@ -17,7 +17,7 @@ VENDOR=samsung
 DEVICE=venturi
 OUTDIR=vendor/$VENDOR/$DEVICE
 
-mkdir -p ../../../vendor/$MANUFACTURER/$DEVICE
+mkdir -p ../../../vendor/$VENDOR/$DEVICE
 
 (cat << EOF) > ../../../$OUTDIR/$DEVICE-vendor.mk
 # Copyright (C) 2010 The Android Open Source Project
@@ -46,7 +46,7 @@ PRODUCT_PACKAGES := \\
 PRODUCT_COPY_FILES := \\
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml
 
-\$(call inherit-product, vendor/$MANUFACTURER/$DEVICE/$DEVICE-vendor-blobs.mk)
+\$(call inherit-product, vendor/$VENDOR/$DEVICE/$DEVICE-vendor-blobs.mk)
 EOF
 
 

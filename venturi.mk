@@ -69,7 +69,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/venturi/init.venturi.usb.rc:root/init.venturi.usb.rc \
 	device/samsung/venturi/lpm.rc:root/lpm.rc \
 	device/samsung/venturi/ueventd.rc:root/ueventd.rc \
-	device/samsung/venturi/ueventd.venturi.rc:root/ueventd.venturi.rc
+	device/samsung/venturi/ueventd.venturi.rc:root/ueventd.venturi.rc \
 	device/samsung/venturi/recovery.rc:recovery/root/recovery.rc
 
 PRODUCT_AAPT_CONFIG := normal hdpi
