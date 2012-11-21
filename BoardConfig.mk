@@ -111,7 +111,8 @@ BOARD_EGL_CFG := device/samsung/venturi/egl.cfg
 # FM Radio
 BOARD_HAVE_FM_RADIO := true
 
-
+# Touchscreen
+BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 
 
@@ -129,10 +130,11 @@ BOARD_HAVE_FM_RADIO := true
 # Suspend in charger to disable capacitive keys
 #BOARD_ALLOW_SUSPEND_IN_CHARGER := true
 
+# Audio
 #TARGET_PROVIDES_LIBAUDIO := true
 #BOARD_USES_AUDIO_LEGACY := true
+
 #COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
-#BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 #BOARD_WLAN_DEVICE           := bcmdhd
 #BOARD_WLAN_DEVICE_REV       := bcm4329
