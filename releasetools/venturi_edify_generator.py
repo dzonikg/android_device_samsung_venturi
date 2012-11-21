@@ -101,15 +101,15 @@ class EdifyGenerator(object):
            ");")
     self.script.append(self._WordWrap(cmd))
 
-  #def RunBackup(self, command):
-  #  self.script.append('package_extract_file("system/bin/backuptool.sh", "/tmp/backuptool.sh");')
-  #  self.script.append('package_extract_file("system/bin/backuptool.functions", "/tmp/backuptool.functions");')
-  #  self.script.append('set_perm(0, 0, 0777, "/tmp/backuptool.sh");')
-  #  self.script.append('set_perm(0, 0, 0644, "/tmp/backuptool.functions");')
-  #  self.script.append(('run_program("/tmp/backuptool.sh", "%s");' % command))
-  #  if command == "restore":
-  #      self.script.append('delete("/system/bin/backuptool.sh");')
-  #      self.script.append('delete("/system/bin/backuptool.functions");')
+  def RunBackup(self, command):
+    self.script.append('package_extract_file("system/bin/backuptool.sh", "/tmp/backuptool.sh");')
+    self.script.append('package_extract_file("system/bin/backuptool.functions", "/tmp/backuptool.functions");')
+    self.script.append('set_perm(0, 0, 0777, "/tmp/backuptool.sh");')
+    self.script.append('set_perm(0, 0, 0644, "/tmp/backuptool.functions");')
+    self.script.append(('run_program("/tmp/backuptool.sh", "%s");' % command))
+    if command == "restore":
+        self.script.append('delete("/system/bin/backuptool.sh");')
+        self.script.append('delete("/system/bin/backuptool.functions");')
 
   def RunConfig(self, command):
     self.script.append('package_extract_file("system/bin/modelid_cfg.sh", "/tmp/modelid_cfg.sh");')
@@ -158,6 +158,12 @@ class EdifyGenerator(object):
                           p.device, p.mount_point))
       self.mounts.add(p.mount_point)
 
+  def Unmount(self, mount_point):
+    """Unmount the partiiton with the given mount_point."""
+    if mount_point in self.mounts:
+      self.mounts.remove(mount_point)
+      self.script.append('unmount("%s");' % (mount_point,))
+
   def UnpackPackageDir(self, src, dst):
     """Unpack a given directory from the OTA package into the given
     destination directory."""
@@ -169,23 +175,6 @@ class EdifyGenerator(object):
     for i in comment.split("\n"):
       self.script.append("# " + i)
     self.script.append("")
-
-  def Ext4Stuff(self):
-    self.script.append('package_extract_file("system/etc/bootutils/updater.sh", "/tmp/updater.sh");')
-    self.script.append('set_perm(0, 0, 0777, "/tmp/updater.sh");')
-    self.script.append('package_extract_file("system/etc/bootutils/make_ext4fs", "/tmp/make_ext4fs");')
-    self.script.append('set_perm(0, 0, 0777, "/tmp/make_ext4fs");')
-    self.script.append('package_extract_file("system/etc/bootutils/busybox", "/tmp/busybox");')
-    self.script.append('set_perm(0, 0, 0777, "/tmp/busybox");')
-    self.script.append('assert(run_program("/tmp/updater.sh") == 0);')
-
-  def ExtractBoot(self):
-    self.script.append('assert(package_extract_file("system/etc/bootutils/cm7boot.img", "/tmp/cm7boot.img"),')
-    self.script.append('write_raw_image("/tmp/cm7boot.img", "/dev/block/mmcblk0p11"),')
-    self.script.append('delete("/tmp/boot.img"));')
-    self.script.append('assert(package_extract_file("system/etc/bootutils/cm7boot.img", "/tmp/cm7boot.img"),')
-    self.script.append('write_raw_image("/tmp/cm7boot.img", "/dev/block/mmcblk0p12"),')
-    self.script.append('delete("/tmp/boot.img"));')
 
   def Print(self, message):
     """Log a message to the screen (if the logs are visible)."""
@@ -199,9 +188,9 @@ class EdifyGenerator(object):
     fstab = self.info.get("fstab", None)
     if fstab:
       p = fstab[partition]
-      self.script.append('format("%s", "%s", "%s", "%s");' %
+      self.script.append('format("%s", "%s", "%s", "%s", "%s");' %
                          (p.fs_type, common.PARTITION_TYPES[p.fs_type],
-                          p.device, p.length))
+                          p.device, p.length, p.mount_point))
 
   def DeleteFiles(self, file_list):
     """Delete all files in file_list."""
@@ -238,8 +227,10 @@ class EdifyGenerator(object):
             'write_raw_image("/tmp/boot.img", "%(device)s");' % args
             % args)
       elif partition_type == "EMMC":
-        self.script.append(
-            'package_extract_file("%(fn)s", "%(device)s");' % args)
+	        self.script.append(
+            ('assert(package_extract_file("%(fn)s", "/tmp/%(device)s.img"),\n'
+             '       write_raw_image("/tmp/%(device)s.img", "%(device)s"),\n'
+             '       delete("/tmp/%(device)s.img"));') % args)
       else:
         raise ValueError("don't know how to write \"%s\" partitions" % (p.fs_type,))
 
@@ -262,20 +253,6 @@ class EdifyGenerator(object):
       cmd = ('symlink("%s", ' % (dest,) +
              ",\0".join(['"' + i + '"' for i in sorted(links)]) + ");")
       self.script.append(self._WordWrap(cmd))
-
-  def RetouchBinaries(self, file_list):
-    """Execute the retouch instructions in files listed."""
-    cmd = ('retouch_binaries(' +
-           ', '.join(['"' + i[0] + '", "' + i[1] + '"' for i in file_list]) +
-           ');')
-    self.script.append(self._WordWrap(cmd))
-
-  def UndoRetouchBinaries(self, file_list):
-    """Undo the retouching (retouch to zero offset)."""
-    cmd = ('undo_retouch_binaries(' +
-           ', '.join(['"' + i[0] + '", "' + i[1] + '"' for i in file_list]) +
-           ');')
-    self.script.append(self._WordWrap(cmd))
 
   def AppendExtra(self, extra):
     """Append text verbatim to the output script."""
