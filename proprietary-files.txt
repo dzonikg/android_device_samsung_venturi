@@ -38,10 +38,11 @@ vendor/etc/gps.xml
 vendor/lib/hw/gps.s5pc110.so
 
 vendor/bin/pvrsrvinit
-vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
 lib/egl/libGLES_android.so
+vendor/lib/egl/libEGL_POWERVR_SGX540_120.so
 vendor/lib/egl/libGLESv1_CM_POWERVR_SGX540_120.so
 vendor/lib/egl/libGLESv2_POWERVR_SGX540_120.so
+vendor/lib/hw/gralloc.s5pc110.so
 vendor/lib/libsrv_um.so
 vendor/lib/libsrv_init.so
 vendor/lib/libIMGegl.so
@@ -50,6 +51,7 @@ vendor/lib/libpvrANDROID_WSEGL.so
 vendor/lib/libglslcompiler.so
 vendor/lib/libPVRScopeServices.so
 vendor/lib/libusc.so
+
 vendor/firmware/samsung_mfc_fw.bin 
 vendor/firmware/nvram_net.txt
 vendor/firmware/bcm4329_sta.bin
@@ -62,9 +64,8 @@ vendor/bin/orientationd
 vendor/lib/libsensorservice.so
 vendor/lib/libsensor_yamaha_test.so
 vendor/lib/hw/sensors.default.so
-vendor/lib/hw/gralloc.s5pc110.so
 vendor/lib/hw/copybit.s5pc110.so
-#vendor/lib/hw/lights.s5pc110.so
+vendor/lib/hw/lights.s5pc110.so
 vendor/lib/hw/overlay.s5pc110.so
 
 bin/playlpm

@@ -221,16 +221,11 @@ class EdifyGenerator(object):
       p = fstab[mount_point]
       partition_type = common.PARTITION_TYPES[p.fs_type]
       args = {'device': p.device, 'fn': fn}
-      if partition_type == "MTD":
+      if partition_type == "EMMC":
         self.script.append(
             'package_extract_file("%(fn)s", "/tmp/boot.img");'
             'write_raw_image("/tmp/boot.img", "%(device)s");' % args
             % args)
-      elif partition_type == "EMMC":
-	        self.script.append(
-            ('assert(package_extract_file("%(fn)s", "/tmp/%(device)s.img"),\n'
-             '       write_raw_image("/tmp/%(device)s.img", "%(device)s"),\n'
-             '       delete("/tmp/%(device)s.img"));') % args)
       else:
         raise ValueError("don't know how to write \"%s\" partitions" % (p.fs_type,))
 

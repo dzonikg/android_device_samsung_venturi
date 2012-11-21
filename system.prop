@@ -20,3 +20,5 @@ media.stagefright.enable-scan=false
 media.stagefright.enable-http=true
 media.stagefright.enable-rtsp=false
 
+# Bluetooth
+ro.bt.bdaddr_path=/data/bdaddr

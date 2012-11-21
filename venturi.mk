@@ -55,10 +55,11 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.usb.default \
 	hwcomposer.s5pc110 \
-	lights.s5pc110 \
 	libs3cjpeg \
 	libaudiohw_legacy \
-	libaudioutils
+	libaudioutils \
+	libtinyalsa \
+#	lights.s5pc110
 
 # Init files
 PRODUCT_COPY_FILES += \
@@ -82,6 +83,7 @@ PRODUCT_PACKAGES += \
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi/s3c-keypad.kl:system/usr/keylayout/s3c-keypad.kl \
+	device/samsung/venturi/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
 	device/samsung/venturi/cytma340_input.idc:system/usr/idc/cytma340_input.idc \
 	device/samsung/venturi/cytma340_input.kl:system/usr/keylayout/cytma340_input.kl
 
@@ -89,11 +91,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES := \
        cypress-touchkey.kcm \
        s3c-keypad.kcm
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-	make_ext4fs \
-	setup_fs
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
@@ -167,11 +164,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 #    $(call find-copy-subdir-files,*,device/samsung/venturi/modules/ramdisk,root/lib/modules)
 #PRODUCT_COPY_FILES += \
 #    $(call find-copy-subdir-files,*,device/samsung/venturi/modules/ramdisk,recovery/root/lib/modules)
-
-# kernel modules
-#PRODUCT_COPY_FILES += $(foreach module,\
-#	$(wildcard device/samsung/venturi/modules/*.ko),\
-#	$(module):system/lib/modules/$(notdir $(module)))
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care

@@ -400,7 +400,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
   if OPTIONS.backuptool:
     script.Mount("/system")
     script.RunBackup("backup")
-    script.Unmount("/system")
+
+  script.Unmount("/system")
 
   script.ShowProgress(0.5, 0)
 
@@ -440,6 +441,8 @@ def WriteFullOTAPackage(input_zip, output_zip):
 
   script.ShowProgress(0.2, 10)
   script.WriteRawImage("/boot", "boot.img")
+
+  script.append('run_program("/system/bin/bdaddr_read");')
 
   script.ShowProgress(0.1, 0)
   device_specific.FullOTA_InstallEnd()
