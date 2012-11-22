@@ -1,5 +1,5 @@
 import init.venturi.usb.rc
-#import init.venturi.gps.rc
+import init.venturi.gps.rc
 
 on init
     loglevel 9

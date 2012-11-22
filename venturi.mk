@@ -36,24 +36,27 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.usb.default \
 	hwcomposer.s5pc110 \
-	libs3cjpeg \
 	libaudiohw_legacy \
 	libaudioutils \
+	libs3cjpeg \
+	libstagefrighthw \
 	libtinyalsa \
+	power.s5pc110 \
 	tvouthack
 
 # Init files
-PRODUCT_COPY_FILES += \
-	device/samsung/venturi/init.rc:recovery/root/init.rc \
-	device/samsung/venturi/init.cm.rc:recovery/root/init.cm.rc \
-	device/samsung/venturi/init.trace.rc:recovery/root/init.trace.rc \
-	device/samsung/venturi/init.usb.rc:recovery/root/init.usb.rc \
-	device/samsung/venturi/init.venturi.rc:recovery/root/init.venturi.rc \
-	device/samsung/venturi/init.venturi.usb.rc:recovery/root/init.venturi.usb.rc \
-	device/samsung/venturi/lpm.rc:recovery/root/lpm.rc \
-	device/samsung/venturi/recovery.rc:recovery/root/recovery.rc \
-	device/samsung/venturi/ueventd.rc:recovery/root/ueventd.rc \
-	device/samsung/venturi/ueventd.venturi.rc:recovery/root/ueventd.venturi.rc
+#PRODUCT_COPY_FILES += \
+#	device/samsung/venturi/init.rc:recovery/root/init.rc \
+#	device/samsung/venturi/init.cm.rc:recovery/root/init.cm.rc \
+#	device/samsung/venturi/init.trace.rc:recovery/root/init.trace.rc \
+#	device/samsung/venturi/init.usb.rc:recovery/root/init.usb.rc \
+#	device/samsung/venturi/init.venturi.rc:recovery/root/init.venturi.rc \
+#	device/samsung/venturi/init.venturi.gps.rc:recovery/root/init.venturi.gps.rc \
+#	device/samsung/venturi/init.venturi.usb.rc:recovery/root/init.venturi.usb.rc \
+#	device/samsung/venturi/lpm.rc:recovery/root/lpm.rc \
+#	device/samsung/venturi/recovery.rc:recovery/root/recovery.rc \
+#	device/samsung/venturi/ueventd.rc:recovery/root/ueventd.rc \
+#	device/samsung/venturi/ueventd.venturi.rc:recovery/root/ueventd.venturi.rc
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -141,6 +144,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+# Include additional hardware makefiles
+# Broadcom Wi-Fi
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/Android.mk)
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
+
+# Samsung
+$(call inherit-product-if-exists, hardware/samsung/Android.mk)
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
