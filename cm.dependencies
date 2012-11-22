@@ -1,0 +1,7 @@
+[
+  {
+    "repository": "Mevordel/android_kernel_samsung_venturi",
+    "target_path": "kernel/samsung/venturi",
+    "revision": "jellybean"
+  }
+]

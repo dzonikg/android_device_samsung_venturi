@@ -59,18 +59,20 @@ PRODUCT_PACKAGES += \
 	libaudiohw_legacy \
 	libaudioutils \
 	libtinyalsa \
-#	lights.s5pc110
+	tvouthack
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi/init.rc:root/init.rc \
-	device/samsung/venturi/init.usb.rc:root/init.usb.rc \
-	device/samsung/venturi/init.venturi.rc:root/init.venturi.rc \
-	device/samsung/venturi/init.venturi.usb.rc:root/init.venturi.usb.rc \
-	device/samsung/venturi/lpm.rc:root/lpm.rc \
-	device/samsung/venturi/ueventd.rc:root/ueventd.rc \
-	device/samsung/venturi/ueventd.venturi.rc:root/ueventd.venturi.rc \
-	device/samsung/venturi/recovery.rc:recovery/root/recovery.rc
+	device/samsung/venturi/init.rc:recovery/root/init.rc \
+	device/samsung/venturi/init.cm.rc:recovery/root/init.cm.rc \
+	device/samsung/venturi/init.trace.rc:recovery/root/init.trace.rc \
+	device/samsung/venturi/init.usb.rc:recovery/root/init.usb.rc \
+	device/samsung/venturi/init.venturi.rc:recovery/root/init.venturi.rc \
+	device/samsung/venturi/init.venturi.usb.rc:recovery/root/init.venturi.usb.rc \
+	device/samsung/venturi/lpm.rc:recovery/root/lpm.rc \
+	device/samsung/venturi/recovery.rc:recovery/root/recovery.rc \
+	device/samsung/venturi/ueventd.rc:recovery/root/ueventd.rc \
+	device/samsung/venturi/ueventd.venturi.rc:recovery/root/ueventd.venturi.rc
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -137,7 +139,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-       wifi.interface=eth0 \
+       wifi.interface=wlan0 \
        wifi.supplicant_scan_interval=15 \
        dalvik.vm.heapsize=128m
 
@@ -158,12 +160,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
-
-# kernel modules for ramdisk
-#PRODUCT_COPY_FILES += \
-#    $(call find-copy-subdir-files,*,device/samsung/venturi/modules/ramdisk,root/lib/modules)
-#PRODUCT_COPY_FILES += \
-#    $(call find-copy-subdir-files,*,device/samsung/venturi/modules/ramdisk,recovery/root/lib/modules)
 
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care

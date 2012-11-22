@@ -36,16 +36,15 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
-TARGET_PROVIDES_INIT := true
+#TARGET_PROVIDES_INIT := true
 TARGET_BOARD_PLATFORM := s5pv210
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 TARGET_BOOTLOADER_BOARD_NAME := s5pc110
 #TARGET_PROVIDES_INIT_TARGET_RC := false
-TARGET_RECOVERY_INITRC := device/samsung/venturi/recovery.rc
+#TARGET_RECOVERY_INITRC := device/samsung/venturi/recovery.rc
 
 # Releasetools
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/venturi/releasetools/venturi_ota_from_target_files
-TARGET_RELEASETOOL_IMG_FROM_TARGET_SCRIPT := ./device/samsung/venturi/releasetools/venturi_img_from_target_files
 
 # Camera
 ifeq ($(USE_CAMERA_STUB),false)
@@ -66,7 +65,7 @@ BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 BOARD_KERNEL_BASE := 0x32000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
-TARGET_KERNEL_CONFIG := yp_g70_usa_defconfig
+TARGET_KERNEL_CONFIG := venturi_usa_defconfig
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 47864320
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 304087040
@@ -85,8 +84,8 @@ WIFI_DRIVER_MODULE_NAME     :=  "bcm4329"
 WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
 
 # Vold
-BOARD_VOLD_MAX_PARTITIONS := 17
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 19
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
 
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true

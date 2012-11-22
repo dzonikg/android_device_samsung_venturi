@@ -197,76 +197,11 @@ def DumpInfoDict(d):
     print "%-25s = (%s) %s" % (k, type(v).__name__, v)
 
 def BuildBootableImage(sourcedir, fs_config_file):
-  """Take a kernel, cmdline, and ramdisk directory from the input (in
-  'sourcedir'), and turn them into a boot image.  Return the image
-  data, or None if sourcedir does not appear to contains files for
-  building the requested image."""
+  """Take a kernel from the input (in 'sourcedir'), and copy it as
+  a boot image.  Return the image data."""
 
-  if (not os.access(os.path.join(sourcedir, "RAMDISK"), os.F_OK) or
-      not os.access(os.path.join(sourcedir, "kernel"), os.F_OK)):
-    return None
-
-  ramdisk_img = tempfile.NamedTemporaryFile()
-  img = tempfile.NamedTemporaryFile()
-
-  if os.access(fs_config_file, os.F_OK):
-    cmd = ["mkbootfs", "-f", fs_config_file, os.path.join(sourcedir, "RAMDISK")]
-  else:
-    cmd = ["mkbootfs", os.path.join(sourcedir, "RAMDISK")]
-  p1 = Run(cmd, stdout=subprocess.PIPE)
-  p2 = Run(["minigzip"],
-           stdin=p1.stdout, stdout=ramdisk_img.file.fileno())
-
-  p2.wait()
-  p1.wait()
-  assert p1.returncode == 0, "mkbootfs of %s ramdisk failed" % (targetname,)
-  assert p2.returncode == 0, "minigzip of %s ramdisk failed" % (targetname,)
-
-  """check if uboot is requested"""
-  fn = os.path.join(sourcedir, "ubootargs")
-  if os.access(fn, os.F_OK):
-    cmd = ["mkimage"]
-    for argument in open(fn).read().rstrip("\n").split(" "):
-      cmd.append(argument)
-    cmd.append("-d")
-    cmd.append(os.path.join(sourcedir, "kernel")+":"+ramdisk_img.name)
-    cmd.append(img.name)
-
-  else:
-    cmd = ["mkbootimg", "--kernel", os.path.join(sourcedir, "kernel")]
-
-    fn = os.path.join(sourcedir, "cmdline")
-    if os.access(fn, os.F_OK):
-      cmd.append("--cmdline")
-      cmd.append(open(fn).read().rstrip("\n"))
-
-    fn = os.path.join(sourcedir, "base")
-    if os.access(fn, os.F_OK):
-      cmd.append("--base")
-      cmd.append(open(fn).read().rstrip("\n"))
-
-    fn = os.path.join(sourcedir, "pagesize")
-    if os.access(fn, os.F_OK):
-      cmd.append("--pagesize")
-      cmd.append(open(fn).read().rstrip("\n"))
-
-    fn = os.path.join(sourcedir, "ramdiskaddr")
-    if os.access(fn, os.F_OK):
-      cmd.append("--ramdiskaddr")
-      cmd.append(open(fn).read().rstrip("\n"))
-
-    cmd.extend(["--ramdisk", ramdisk_img.name,
-                "--output", img.name])
-
-  p = Run(cmd, stdout=subprocess.PIPE)
-  p.communicate()
-  assert p.returncode == 0, "mkbootimg of %s image failed" % (
-      os.path.basename(sourcedir),)
-
-  img.seek(os.SEEK_SET, 0)
+  img = open(os.path.join(sourcedir, "kernel"), "rb")
   data = img.read()
-
-  ramdisk_img.close()
   img.close()
 
   return data
