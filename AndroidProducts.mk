@@ -26,4 +26,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/cm_venturi.mk
+    $(LOCAL_DIR)/full_venturi.mk
