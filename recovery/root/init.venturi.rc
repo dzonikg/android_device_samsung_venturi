@@ -174,7 +174,7 @@ service iprenew_bnep0 /system/bin/dhcpcd -n
 service bdaddr /system/bin/bdaddr_read
     class main
     user root
-    disabled
+#    disabled
     oneshot
 
 on property:init.svc.bootanim=running
@@ -214,4 +214,4 @@ service tvout /system/bin/tvoutserver
 service tvouthack /system/bin/tvouthack
     user system
     group graphics
-    disabled
+#    disabled
