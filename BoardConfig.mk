@@ -39,11 +39,6 @@ TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := s5pc110
 TARGET_BOARD_PLATFORM_GPU := POWERVR_SGX540_120
 TARGET_BOOTLOADER_BOARD_NAME := s5pc110
-# TARGET_PROVIDES_INIT_RC := true
-# TARGET_PROVIDES_INIT_TARGET_RC := true
-# This one seems counterintuitive, but is how we get the right one in the
-# right place, since we are using the recovery ramdisk as the main one.
-# TARGET_RECOVERY_INITRC := device/samsung/venturi/init.rc
 
 # Releasetools
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := ./device/samsung/venturi/releasetools/venturi_ota_from_target_files
@@ -74,17 +69,21 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 304087040
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2017460224
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# WiFi related defines
-BOARD_WPA_SUPPLICANT_DRIVER := WEXT
-WPA_SUPPLICANT_VERSION := VER_0_8_X
+# Connectivity - Wi-Fi
+WPA_SUPPLICANT_VERSION      := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
-BOARD_WLAN_DEVICE := bcmdhd
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcmdhd.ko"
-WIFI_DRIVER_MODULE_NAME     :=  "bcmdhd"
-WIFI_DRIVER_MODULE_ARG      :=  "firmware_path=/vendor/firmware/fw_bcmdhd.bin nvram_path=/vendor/firmware/nvram_net.txt"
+BOARD_HOSTAPD_DRIVER        := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
+BOARD_WLAN_DEVICE           := bcmdhd
+BOARD_WLAN_DEVICE_REV       := bcm4329
+WIFI_DRIVER_MODULE_NAME     := "bcmdhd"
+WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 
 # Vold
-BOARD_VOLD_MAX_PARTITIONS := 19
+#BOARD_VOLD_MAX_PARTITIONS := 19
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
 
 # Recovery
@@ -92,7 +91,12 @@ TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
+TARGET_RECOVERY_POST_COMMAND := "rm -f /cache/.startrecovery; sync;"
 TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70
+
+DEVICE_RESOLUTION := 320x480
+TARGET_RECOVERY_GUI := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun%d/file
@@ -133,3 +137,4 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 #BOARD_USES_AUDIO_LEGACY := true
 #COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
 #BOARD_WEXT_NO_COMBO_SCAN := true
+#BOARD_USE_SKIA_LCDTEXT := true
