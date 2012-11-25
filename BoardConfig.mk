@@ -92,7 +92,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 TARGET_RECOVERY_POST_COMMAND := "rm -f /cache/.startrecovery; sync;"
-TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70
+TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70,venturi_usa
 
 DEVICE_RESOLUTION := 320x480
 TARGET_RECOVERY_GUI := true
