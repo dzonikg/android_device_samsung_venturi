@@ -94,8 +94,7 @@ TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 TARGET_RECOVERY_POST_COMMAND := "rm -f /cache/.startrecovery; sync;"
 TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70,venturi_usa
 
-DEVICE_RESOLUTION := 320x480
-TARGET_RECOVERY_GUI := true
+BOARD_TOUCH_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
 
 # USB
