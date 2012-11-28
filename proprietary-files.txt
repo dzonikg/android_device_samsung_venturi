@@ -57,8 +57,6 @@ vendor/firmware/nvram_net.txt
 vendor/firmware/bcm4329.hcd
 vendor/firmware/bcm4329_sta.bin
 vendor/firmware/bcm4329_aps.bin
-vendor/firmware/fw_bcm4329.bin
-vendor/firmware/fw_bcm4329_apsta.bin
 etc/wifi/wifi.conf
 bin/BCM4329B1_002.002.023.0589.0649.hcd
 
