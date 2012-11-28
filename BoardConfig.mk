@@ -83,8 +83,8 @@ WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 
 # Vold
-#BOARD_VOLD_MAX_PARTITIONS := 19
-BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := false
+BOARD_VOLD_MAX_PARTITIONS := 17
+BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
 
 # Recovery
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -94,7 +94,7 @@ TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70,venturi_usa
 TARGET_RECOVERY_INITRC := device/samsung/venturi/recovery.rc
 BOARD_TOUCH_RECOVERY := true
-TARGET_RECOVERY_PIXEL_FORMAT := "RGB_565"
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun%d/file
@@ -128,11 +128,8 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 
 # hwcomposer: custom vsync ioctl
 #BOARD_CUSTOM_VSYNC_IOCTL := true
-# Suspend in charger to disable capacitive keys
-#BOARD_ALLOW_SUSPEND_IN_CHARGER := true
 # Audio
 #TARGET_PROVIDES_LIBAUDIO := true
 #BOARD_USES_AUDIO_LEGACY := true
 #COMMON_GLOBAL_CFLAGS += -DMISSING_EGL_EXTERNAL_IMAGE -DMISSING_EGL_PIXEL_FORMAT_YV12 -DMISSING_GRALLOC_BUFFERS
-#BOARD_WEXT_NO_COMBO_SCAN := true
 #BOARD_USE_SKIA_LCDTEXT := true
