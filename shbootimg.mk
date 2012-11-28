@@ -7,8 +7,9 @@ $(COMBINED_RD) : $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET)
 	mkdir -pv $(COMBINED_RD)/{,recovery,normal}
 	cp -rfa $(PRODUCT_OUT)/root/* -t $(COMBINED_RD)/normal/
 	cp -rfa $(PRODUCT_OUT)/recovery/root/* -t $(COMBINED_RD)/recovery/
-	cp -fa $(TARGET_DEVICE_DIR)/init.sh $(COMBINED_RD)/init
-	chmod 755 $(COMBINED_RD)/init
+	cp -f $(TARGET_DEVICE_DIR)/init.sh $(COMBINED_RD)/init
+	cp -f $(TARGET_OUT)/xbin/busybox $(COMBINED_RD)/busybox
+	chmod 755 $(COMBINED_RD)/init $(COMBINED_RD)/busybox
 
 # Add ramdisk dependencies to kernel
 TARGET_KERNEL_BINARIES: $(COMBINED_RD)
