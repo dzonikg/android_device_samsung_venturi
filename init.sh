@@ -1,32 +1,55 @@
-#!/recovery/sbin/sh
+#!/busybox sh
 # Script to load correct initramfs files for normal/recovery boot
 
-# Move ourself out of the way
-/recovery/sbin/rm /init
+# Set up environment
+export _PATH="$PATH"
+export PATH="/"
+
+# Log our output
+busybox date >> /boot.txt
+exec >> /boot.txt 2>&1
 
 # Set up kernel interfaces
-/recovery/sbin/mkdir /proc
-/recovery/sbin/mount -t proc proc /proc
-/recovery/sbin/mkdir /sys
-/recovery/sbin/mount -t sysfs sysfs /sys
-/recovery/sbin/mkdir /dev
-/recovery/sbin/mkdir /dev/block
-/recovery/sbin/mknod /dev/block/mmcblk0p15 259 7
-/recovery/sbin/mount /dev/block/mmcblk0p15 /cache
+busybox mount -t proc proc /proc
+busybox mount -t sysfs sysfs /sys
+
+# Move ourself out of the way
+busybox rm /init
+
+# Mount /cache
+busybox mkdir /dev/block
+busybox mknod /dev/block/mmcblk0p15 b 259 7
+# busybox mount /dev/block/mmcblk0p15 /cache
+busybox mount -t ext4 /dev/block/mmcblk0p15 /cache
 
 # Check for recovery mode and move appropriate files
-if /recovery/sbin/test -e /cache/.startrecovery || /recovery/sbin/grep -q bootmode=2 /proc/cmdline; then
-	/recovery/sbin/mv /recovery/* /
-	/recovery/sbin/rm -rf /normal
-	/recovery/sbin/rm /cache/.startrecovery
+if busybox test -e /cache/.startrecovery || busybox grep -q bootmode=2 /proc/cmdline; then
+	# Recovery boot
+	busybox mv /recovery/* /
+#	busybox rm -rf /normal
+	busybox rm /cache/.startrecovery
+
+	# Disable lpm
+	busybox echo 0 > /sys/class/power_supply/battery/charging_mode_booting
 else
-	/recovery/sbin/mv /normal/* /
-	/recovery/sbin/rm -rf /recovery
+	busybox mv /normal/* /
+#	busybox rm -rf /recovery
+fi
+
+# Should we enter low power mode?
+if busybox grep -q 1 /sys/class/power_supply/battery/charging_mode_booting ; then
+	busybox cp -f lpm.rc init.rc
 fi
 
 # Clean Up
-/recovery/sbin/rm -rf /dev
-/recovery/sbin/umount /cache
+busybox umount /cache
+busybox umount /sys
+busybox umount /proc
+busybox date >> /boot.txt
+
+# Final stage - remove busybox
+busybox rm /busybox
 
 # Run init
+export PATH="${_PATH}"
 exec /init

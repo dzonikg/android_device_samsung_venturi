@@ -62,7 +62,11 @@ BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 BOARD_KERNEL_BASE := 0x32000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi/shbootimg.mk
 TARGET_KERNEL_CONFIG := venturi_usa_defconfig
+TARGET_PROVIDES_INIT_RC := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70,venturi_usa
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 47864320
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 304087040
@@ -87,14 +91,11 @@ BOARD_VOLD_MAX_PARTITIONS := 17
 BOARD_VOLD_DISC_HAS_MULTIPLE_MAJORS := true
 
 # Recovery
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi/shbootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
-TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70,venturi_usa
 TARGET_RECOVERY_INITRC := device/samsung/venturi/recovery.rc
-BOARD_TOUCH_RECOVERY := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/venturi/recovery/graphics.c
+BOARD_HAS_NO_SELECT_BUTTON := true
 
 # USB
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/usb_mass_storage/lun%d/file
