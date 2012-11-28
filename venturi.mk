@@ -106,7 +106,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-	frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
 	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
 	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
@@ -136,11 +135,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Default=true for development builds, set by android buildsystem.
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.kernel.android.checkjni=0 \
-	dalvik.vm.checkjni=false \
-	persist.sys.vold.switchexternal=1
+	dalvik.vm.checkjni=false
+
+# We have sacrificed /cache for a larger /system, so it's not large enough for dalvik cache
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dexopt-data-only=1
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
+
+# Set default USB interface and default to internal SD as /sdcard
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mass_storage \
+    persist.sys.vold.switchexternal=1
 
 # Include additional hardware makefiles
 # Broadcom Wi-Fi
