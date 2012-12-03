@@ -4,7 +4,7 @@ LOCAL_PATH := $(call my-dir)
 COMBINED_RD := $(PRODUCT_OUT)/combined
 $(COMBINED_RD) : $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET)
 	rm -rf $(COMBINED_RD)
-	mkdir -pv $(COMBINED_RD)/{,recovery,normal,dev,proc,sys,cache}
+	mkdir -p $(COMBINED_RD)/{,recovery,normal,dev,proc,sys,cache}
 	cp -rfa $(PRODUCT_OUT)/root/* -t $(COMBINED_RD)/normal/
 	cp -rfa $(PRODUCT_OUT)/recovery/root/* -t $(COMBINED_RD)/recovery/
 	cp -f $(TARGET_DEVICE_DIR)/init.sh $(COMBINED_RD)/init
