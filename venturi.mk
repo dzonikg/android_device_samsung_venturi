@@ -19,8 +19,7 @@
 # Inherit our vendor files
 $(call inherit-product, vendor/samsung/venturi/venturi-vendor.mk)
 
-#DEVICE_PACKAGE_OVERLAYS := device/samsung/venturi/overlay
-#DEVICE_PACKAGE_OVERLAYS += device/samsung/venturi/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/venturi/overlay
 
 # Boot animation
 TARGET_BOOTANIMATION_NAME := vertical-480x800
@@ -45,22 +44,16 @@ PRODUCT_PACKAGES += \
 	audio.a2dp.default \
 	audio.usb.default \
 	hwcomposer.s5pc110 \
-	libaudiohw_legacy \
-	libhardware_legacy \
-	libaudioutils \
 	libs3cjpeg \
-	libstagefrighthw \
-	libtinyalsa \
 	power.s5pc110 \
 	tvouthack
+#	libaudiohw_legacy \
+#	libhardware_legacy \
+#	libaudioutils \
+#	libtinyalsa \
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
-
-PRODUCT_PACKAGES += \
-	Superuser \
-	Trebuchet \
-	su
 
 # Prebuilt kl keymaps
 PRODUCT_COPY_FILES += \
@@ -79,8 +72,27 @@ PRODUCT_COPY_FILES += \
 	device/samsung/venturi/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/venturi/media_codecs.xml:system/etc/media_codecs.xml
 
+#PRODUCT_COPY_FILES += \
+#	device/samsung/venturi/audio_policy.conf:system/etc/audio_policy.conf
+
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi/audio_policy.conf:system/etc/audio_policy.conf
+	device/samsung/venturi/alsa-lib/src/conf/alsa.conf:system/usr/share/alsa/alsa.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf \
+	device/samsung/venturi/alsa-lib/src/conf/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \
+	device/samsung/venturi/alsa-lib/src/conf/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf
 
 # Libs
 PRODUCT_PACKAGES += \
@@ -94,7 +106,7 @@ PRODUCT_PACKAGES += \
 
 # Device-specific packages
 PRODUCT_PACKAGES += \
-	SamsungServiceMode \
+	SamsungServiceMode
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
