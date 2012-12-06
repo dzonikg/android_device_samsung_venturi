@@ -62,7 +62,7 @@ BOARD_SECOND_CAMERA_DEVICE := /dev/video2
 BOARD_KERNEL_BASE := 0x32000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
-BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi/shbootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := device/samsung/venturi/bootimg.mk
 TARGET_KERNEL_CONFIG := venturi_usa_defconfig
 TARGET_PROVIDES_INIT_RC := true
 TARGET_USERIMAGES_USE_EXT4 := true
