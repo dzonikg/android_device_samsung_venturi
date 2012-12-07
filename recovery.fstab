@@ -1,5 +1,5 @@
 # mount point	fstype		device
-/efs		ext4		/dev/block/mmcblk0p10
+/efs		rfs		/dev/block/mmcblk0p10
 /system		ext4		/dev/block/mmcblk0p13
 /dbdata		ext4		/dev/block/mmcblk0p14
 /cache		ext4		/dev/block/mmcblk0p15
