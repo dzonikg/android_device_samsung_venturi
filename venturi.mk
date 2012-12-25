@@ -19,8 +19,6 @@
 # Inherit our vendor files
 $(call inherit-product, vendor/samsung/venturi/venturi-vendor.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/samsung/venturi/overlay
-
 # Boot animation
 TARGET_BOOTANIMATION_NAME := vertical-480x800
 
@@ -46,7 +44,7 @@ PRODUCT_PACKAGES += \
 	hwcomposer.s5pc110 \
 	libs3cjpeg \
 	power.s5pc110 \
-	tvouthack
+#	tvouthack \
 #	libaudiohw_legacy \
 #	libhardware_legacy \
 #	libaudioutils \
@@ -72,8 +70,8 @@ PRODUCT_COPY_FILES += \
 	device/samsung/venturi/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/venturi/media_codecs.xml:system/etc/media_codecs.xml
 
-#PRODUCT_COPY_FILES += \
-#	device/samsung/venturi/audio_policy.conf:system/etc/audio_policy.conf
+PRODUCT_COPY_FILES += \
+	device/samsung/venturi/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi/alsa-lib/src/conf/alsa.conf:system/usr/share/alsa/alsa.conf \
