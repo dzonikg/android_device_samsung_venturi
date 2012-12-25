@@ -241,6 +241,7 @@ def BuildBootableImage(sourcedir):
   p1.wait()
   assert p1.returncode == 0, "mkbootfs of %s ramdisk failed" % (targetname,)
   assert p2.returncode == 0, "minigzip of %s ramdisk failed" % (targetname,)
+  ramdisk_img.seek(os.SEEK_SET, 0)
 
   recovery_fs_config = "META/recovery_filesystem_config.txt"
   recovery_img = tempfile.NamedTemporaryFile()
@@ -255,6 +256,7 @@ def BuildBootableImage(sourcedir):
   p3.wait()
   assert p3.returncode == 0, "mkbootfs of %s recovery failed" % (targetname,)
   assert p4.returncode == 0, "minigzip of %s recovery failed" % (targetname,)
+  recovery_img.seek(os.SEEK_SET, 0)
 
   kernel = open(os.path.join(sourcedir, "BOOT", "kernel"), 'rb')
   offset_table = "\n\nBOOT_IMAGE_OFFSETS\n"
