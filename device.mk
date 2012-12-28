@@ -33,19 +33,18 @@ PRODUCT_COPY_FILES += \
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi/asound.conf:system/etc/asound.conf \
-	device/samsung/venturi/vold.fstab:system/etc/vold.fstab \
 	device/samsung/venturi/egl.cfg:system/lib/egl/egl.cfg \
-	device/samsung/venturi/wifi.conf:system/etc/wifi/wifi.conf \
-	device/samsung/venturi/gps.conf:system/etc/gps.conf
+	device/samsung/venturi/gps.conf:system/etc/gps.conf \
+	device/samsung/venturi/main.conf:system/etc/bluetooth/main.conf \
+	device/samsung/venturi/vold.fstab:system/etc/vold.fstab \
+	device/samsung/venturi/wifi.conf:system/etc/wifi/wifi.conf
 
 PRODUCT_PACKAGES += \
 	audio.primary.s5pc110 \
 	audio.a2dp.default \
 	audio.usb.default \
 	hwcomposer.s5pc110 \
-	libs3cjpeg \
 	power.s5pc110 \
-#	tvouthack \
 #	libaudiohw_legacy \
 #	libhardware_legacy \
 #	libaudioutils \
@@ -68,8 +67,17 @@ PRODUCT_PACKAGES := \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
+	hardware/samsung/exynos3/s5pc110/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
 	device/samsung/venturi/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/venturi/media_codecs.xml:system/etc/media_codecs.xml
+
+# These are the OpenMAX IL modules
+PRODUCT_PACKAGES += \
+	libSEC_OMX_Core \
+	libOMX.SEC.AVC.Decoder \
+	libOMX.SEC.M4V.Decoder \
+	libOMX.SEC.M4V.Encoder \
+	libOMX.SEC.AVC.Encoder
 
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi/audio_policy.conf:system/etc/audio_policy.conf
@@ -96,8 +104,10 @@ PRODUCT_COPY_FILES += \
 # Libs
 PRODUCT_PACKAGES += \
 	libcamera \
+	libs3cjpeg \
 	libstagefrighthw \
 	Torch
+#	tvouthack \
 
 # Bluetooth MAC Address
 PRODUCT_PACKAGES += \
