@@ -1,6 +1,9 @@
 LOCAL_PATH := $(call my-dir)
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET) | $(ACP)
+# Ramdisk is required to build kernel
+TARGET_KERNEL_BINARIES : $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET)
+
+$(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) | $(ACP)
 	$(call pretty,"Boot image: $@")
 	$(ACP) $(INSTALLED_KERNEL_TARGET) $@
 
