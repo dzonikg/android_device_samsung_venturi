@@ -35,7 +35,6 @@ lib/libsec-ril-apalone.so
 lib/libsecril-client.so
 
 # GPS
-etc/gps.conf
 vendor/bin/gpsd
 vendor/etc/gps.xml
 vendor/lib/hw/gps.s5pc110.so
@@ -58,7 +57,6 @@ vendor/lib/libusc.so
 
 # Wi-Fi / Bluetooth
 bin/BCM4329B1_002.002.023.0589.0649.hcd
-etc/wifi/wifi.conf
 vendor/firmware/samsung_mfc_fw.bin 
 vendor/firmware/nvram_net.txt
 vendor/firmware/bcm4329.hcd

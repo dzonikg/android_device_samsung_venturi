@@ -24,7 +24,6 @@ TARGET_BOOTANIMATION_NAME := vertical-480x800
 
 # Init files
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi/init.rc:root/init.rc \
 	device/samsung/venturi/init.venturi.rc:root/init.venturi.rc \
 	device/samsung/venturi/init.venturi.gps.rc:root/init.venturi.gps.rc \
 	device/samsung/venturi/init.venturi.usb.rc:root/init.venturi.usb.rc \
@@ -35,7 +34,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi/asound.conf:system/etc/asound.conf \
 	device/samsung/venturi/vold.fstab:system/etc/vold.fstab \
-	device/samsung/venturi/egl.cfg:system/lib/egl/egl.cfg
+	device/samsung/venturi/egl.cfg:system/lib/egl/egl.cfg \
+	device/samsung/venturi/wifi.conf:system/etc/wifi/wifi.conf \
+	device/samsung/venturi/gps.conf:system/etc/gps.conf
 
 PRODUCT_PACKAGES += \
 	audio.primary.s5pc110 \

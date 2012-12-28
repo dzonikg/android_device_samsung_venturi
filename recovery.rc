@@ -35,6 +35,7 @@ on init
 
 on fs
     mount tmpfs tmpfs /tmp
+    mount rfs  /dev/block/mmcblk0p10 /efs wait ro
     mount ext4 /dev/block/mmcblk0p13 /system wait rw
     mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev noatime wait
 
