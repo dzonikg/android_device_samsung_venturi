@@ -40,8 +40,10 @@ on fs
     chmod 770 /efs/bluetooth
     chmod 770 /efs/imei
 
-# insmod the touchscreen driver
-    insmod  /lib/modules/qt602240.ko
+# Mount param
+    mkdir /mnt/.lfs/
+    mount j4fs /dev/block/mmcblk0p9 /mnt/.lfs
+    insmod /lib/modules/param.ko
 
 # insmod the kernel modules
     insmod /system/lib/modules/Si4709_driver.ko

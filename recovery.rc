@@ -39,6 +39,11 @@ on fs
     mount ext4 /dev/block/mmcblk0p13 /system wait rw
     mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev noatime wait
 
+# Mount param to not get stuck
+    mkdir /mnt/.lfs
+    mount j4fs /dev/block/mmcblk0p9 /mnt/.lfs
+    insmod /lib/modules/param.ko
+
 on post-fs
     mount rootfs rootfs / ro remount
 
