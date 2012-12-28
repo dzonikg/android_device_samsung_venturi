@@ -115,11 +115,11 @@ loglevel 3
 
 on fs
 # mount emmc partitions
-    # Mount /system rw first to give the filesystem a chance to save a checkpoint
-    mount ext4 /dev/block/mmcblk0p13 /system
-    mount ext4 /dev/block/mmcblk0p13 /system ro remount
-    mount ext4 /dev/block/mmcblk0p16 /data nosuid nodev
+    mount ext4 /dev/block/mmcblk0p13 /system ro
+    mount rfs  /dev/block/mmcblk0p13 /system ro
+    mount rfs  /dev/block/mmcblk0p10 /efs ro
     mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev
+    mount ext4 /dev/block/mmcblk0p16 /data nosuid nodev
 
 on post-fs
     # once everything is setup, no need to modify /

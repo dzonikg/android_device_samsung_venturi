@@ -85,7 +85,7 @@ BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_wext
 BOARD_WLAN_DEVICE           := bcm4329
 BOARD_WLAN_DEVICE_REV       := bcm4329
 WIFI_DRIVER_MODULE_NAME     := "dhd"
-WIFI_DRIVER_MODULE_ARG      := "firmware_path=/vendor/firmware/bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
+WIFI_DRIVER_MODULE_ARG      := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/vendor/firmware/nvram_net.txt"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcm4329.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcm4329_apsta.bin"
 
