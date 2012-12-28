@@ -161,8 +161,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # Include additional hardware makefiles
 # Broadcom Wi-Fi
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/Android.mk)
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4329/device-bcm.mk)
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcm4329/Android.mk)
 
 # Samsung
 $(call inherit-product-if-exists, hardware/samsung/Android.mk)
