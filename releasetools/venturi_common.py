@@ -196,94 +196,22 @@ def DumpInfoDict(d):
   for k, v in sorted(d.items()):
     print "%-25s = (%s) %s" % (k, type(v).__name__, v)
 
-def BuildBootableImage(sourcedir):
-  """Take a directory from the input (in 'sourcedir'),
-  and turn it into a boot image.  Return the image data,
-  or None if sourcedir does not appear to contains files
-  for building the requested image."""
+def BuildBootableImage(sourcedir, fs_config_file):
+  """Take a kernel from the input (in 'sourcedir'), and copy it as
+  a boot image.  Return the image data."""
 
-  def copydata(outfile, infile):
-      while 1:
-          data = infile.read(512)
-          if (data):
-              outfile.write(data)
-          else:
-              break
-  
-  def alignoffset(outfile):
-      offset = outfile.tell()
-      outfile.seek((offset + 511) & ~511)
-      return outfile.tell()
-
-  def appendimage(outfile, infile):
-      offset = alignoffset(outfile)
-      copydata(outfile, infile)
-      length = alignoffset(outfile) - offset
-      assert (offset % 512 == 0)
-      assert (length % 512 == 0)
-      return (offset/512, length/512)
-
-  if (not os.access(os.path.join(sourcedir, "BOOT", "kernel"), os.F_OK) or
-      not os.access(os.path.join(sourcedir, "BOOT", "RAMDISK"), os.F_OK) or
-      not os.access(os.path.join(sourcedir, "RECOVERY", "RAMDISK"), os.F_OK)):
-    return None
-
-  ramdisk_fs_config = "META/boot_filesystem_config.txt"
-  ramdisk_img = tempfile.NamedTemporaryFile()
-  if os.access(ramdisk_fs_config, os.F_OK):
-    cmd = ["mkbootfs", "-f", ramdisk_fs_config, os.path.join(sourcedir, "BOOT", "RAMDISK")]
-  else:
-    cmd = ["mkbootfs", os.path.join(sourcedir, "BOOT", "RAMDISK")]
-  p1 = Run(cmd, stdout=subprocess.PIPE)
-  p2 = Run(["minigzip"],
-           stdin=p1.stdout, stdout=ramdisk_img.file.fileno())
-  p2.wait()
-  p1.wait()
-  assert p1.returncode == 0, "mkbootfs of %s ramdisk failed" % (targetname,)
-  assert p2.returncode == 0, "minigzip of %s ramdisk failed" % (targetname,)
-
-  recovery_fs_config = "META/recovery_filesystem_config.txt"
-  recovery_img = tempfile.NamedTemporaryFile()
-  if os.access(recovery_fs_config, os.F_OK):
-    cmd = ["mkbootfs", "-f", recovery_fs_config, os.path.join(sourcedir, "RECOVERY", "RAMDISK")]
-  else:
-    cmd = ["mkbootfs", os.path.join(sourcedir, "RECOVERY", "RAMDISK")]
-  p3 = Run(cmd, stdout=subprocess.PIPE)
-  p4 = Run(["minigzip"],
-           stdin=p3.stdout, stdout=recovery_img.file.fileno())
-  p4.wait()
-  p3.wait()
-  assert p3.returncode == 0, "mkbootfs of %s recovery failed" % (targetname,)
-  assert p4.returncode == 0, "minigzip of %s recovery failed" % (targetname,)
-
-  kernel = open(os.path.join(sourcedir, "BOOT", "kernel"), 'rb')
-  offset_table = "\n\nBOOT_IMAGE_OFFSETS\n"
-  boot_img = tempfile.NamedTemporaryFile()
-
-  copydata(boot_img, kernel)
-  table_loc = alignoffset(boot_img)
-  boot_img.write('\x00' * 512)
-  offset_table += "boot_offset=%d;boot_len=%d;" % appendimage(boot_img, ramdisk_img)
-  offset_table += "recovery_offset=%d;recovery_len=%d;" % appendimage(boot_img, recovery_img)
-  offset_table += "\n\n"
-  boot_img.seek(table_loc)
-  boot_img.write(offset_table)
-  boot_img.flush()
-  boot_img.seek(os.SEEK_SET, 0)
-  data = boot_img.read()
-
-  ramdisk_img.close()
-  recovery_img.close()
-  kernel.close()
-  boot_img.close()
+  img = open(os.path.join(sourcedir, "kernel"), "rb")
+  data = img.read()
+  img.close()
 
   return data
+
 
 def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir):
   """Return a File object (with name 'name') with the desired bootable
   image.  Look for it in 'unpack_dir'/BOOTABLE_IMAGES under the name
   'prebuilt_name', otherwise construct it from the source files in
-  'unpack_dir'."""
+  'unpack_dir'/'tree_subdir'."""
 
   prebuilt_path = os.path.join(unpack_dir, "BOOTABLE_IMAGES", prebuilt_name)
   if os.path.exists(prebuilt_path):
@@ -291,7 +219,9 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir):
     return File.FromLocalFile(name, prebuilt_path)
   else:
     print "building image from target_files %s..." % (tree_subdir,)
-    return File(name, BuildBootableImage(unpack_dir))
+    fs_config = "META/" + tree_subdir.lower() + "_filesystem_config.txt"
+    return File(name, BuildBootableImage(os.path.join(unpack_dir, tree_subdir),
+                                         os.path.join(unpack_dir, fs_config)))
 
 
 def UnzipTemp(filename, pattern=None):
