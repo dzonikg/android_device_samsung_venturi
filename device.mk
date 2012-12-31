@@ -17,15 +17,15 @@
 # application settings that are stored in resourced.
 
 # Inherit our vendor files
-$(call inherit-product, vendor/samsung/venturi/venturi-vendor.mk)
+$(call inherit-product-if-exists, vendor/samsung/venturi/venturi-vendor.mk)
 
 # Boot animation
 TARGET_BOOTANIMATION_NAME := vertical-480x800
 
 # Init files
 PRODUCT_COPY_FILES += \
+	device/samsung/venturi/fstab.venturi:root/fstab.venturi \
 	device/samsung/venturi/init.venturi.rc:root/init.venturi.rc \
-	device/samsung/venturi/init.venturi.gps.rc:root/init.venturi.gps.rc \
 	device/samsung/venturi/init.venturi.usb.rc:root/init.venturi.usb.rc \
 	device/samsung/venturi/lpm.rc:root/lpm.rc \
 	device/samsung/venturi/ueventd.venturi.rc:root/ueventd.venturi.rc

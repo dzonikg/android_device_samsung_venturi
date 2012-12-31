@@ -201,7 +201,7 @@ def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir):
   image (the kernel).
   """
 
-  return File(name, open(os.path.join(sourcedir, "kernel"), "rb").read())
+  return File(name, open(os.path.join(unpack_dir, tree_subdir, "kernel"), "rb").read())
 
 
 def UnzipTemp(filename, pattern=None):
