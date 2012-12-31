@@ -1,5 +1,4 @@
-import init.venturi.usb.rc
-import init.venturi.gps.rc
+import /init.venturi.usb.rc
 
 on init
     loglevel 9
@@ -15,17 +14,22 @@ on init
     symlink /storage/sdcard1 /emmc
     symlink /storage/sdcard1 /mnt/emmc
 
-    # We will create our own ril-daemon service in class 'core' because the
-    # rild doesn't like being killed. (During device encryption.)
-    stop ril-daemon
+    setprop ro.build.product venturi
+    setprop ro.product.device venturi
+    setprop ro.radio.noril yes
+
+# fake some battery state
+    setprop status.battery.state Slow
+    setprop status.battery.level 5
+    setprop status.battery.level_raw  50
+    setprop status.battery.level_scale 9
+
+# phone
+    setprop ro.telephony.call_ring.multiple 0
 
 on fs
 # mount emmc partitions
-    # Mount /system rw first to give the filesystem a chance to save a checkpoint
-    mount ext4 /dev/block/mmcblk0p13 /system noatime
-    mount ext4 /dev/block/mmcblk0p13 /system ro remount
-    mount ext4 /dev/block/mmcblk0p16 /data nosuid nodev noatime
-    mount ext4 /dev/block/mmcblk0p15 /cache nosuid nodev noatime
+    mount_all /fstab.venturi
 
     # Also try mounting everything as rfs
     mount rfs /dev/block/mmcblk0p13 /system
@@ -45,60 +49,31 @@ on fs
     mount j4fs /dev/block/mmcblk0p9 /mnt/.lfs
     insmod /lib/modules/param.ko
 
+on post-fs
+
 # insmod the kernel modules
     insmod /system/lib/modules/Si4709_driver.ko
     insmod /system/lib/modules/vibrator.ko
     insmod /system/lib/modules/bthid.ko
 
-# Permissions for System Server and daemons.
-    chown system system /sys/class/backlight/s5p_bl/brightness
-    chown system system /sys/devices/virtual/sec/ts/touchkey_led
-
-# change permission for uart_switch
-    chown radio radio /sys/class/sec/uart_switch/UART_SEL/value
-    chmod 660 /sys/class/sec/uart_switch/UART_SEL/value
-
-on post-fs
-# allow system to modify cpufreq control files
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-
 on post-fs-data
-
-# Change permissions for lcd
-    chown radio system /sys/class/lcd/s5p_lcd/lcd_power
-    chown radio radio /sys/class/aclset/switch_aclset/aclset_file_cmd
-    chown radio radio /sys/class/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd
-    chown radio radio /sys/class/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd
-
-    setprop vold.post_fs_data_done 1
-
-on boot
-    setprop ro.build.product venturi
-    setprop ro.product.device venturi
-    setprop ro.radio.noril yes
-    # This is setup by bdaddr_read using /efs/imei/bt.txt
-    setprop ro.bt.bdaddr_path "/data/bdaddr"
-
-# fake some battery state
-    setprop status.battery.state Slow
-    setprop status.battery.level 5
-    setprop status.battery.level_raw  50
-    setprop status.battery.level_scale 9
 
 # wi-fi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
     mkdir /data/misc/dhcp 0777 dhcp dhcp
 
-# phone
-    setprop ro.telephony.call_ring.multiple 0
+# bdaddr_path
+    chown bluetooth bluetooth /data/bdaddr
 
+# create data/gps for GPS daemon
+    mkdir /data/gps 770 gps system
+    chown gps system /data/gps
+
+# Tell vold we are done
+    setprop vold.post_fs_data_done 1
+
+on boot
 # permissions for bluetooth.
-    chown bluetooth bluetooth ro.bt.bdaddr_path
     chown bluetooth bluetooth /dev/s3c2410_serial0
     chmod 0660 /dev/s3c2410_serial0
     chmod 0660 /sys/class/rfkill/rfkill0/state
@@ -114,19 +89,40 @@ on boot
     chown bluetooth bluetooth /sys/class/rfkill/rfkill2/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill3/type
 
+# Permissions for System Server and daemons.
+    chown system system /sys/class/backlight/s5p_bl/brightness
+    chown system system /sys/devices/virtual/sec/ts/touchkey_led
+
+# change permission for uart_switch
+    chown radio radio /sys/class/sec/uart_switch/UART_SEL/value
+    chmod 660 /sys/class/sec/uart_switch/UART_SEL/value
+
+# Change permissions for lcd
+    chown radio system /sys/class/lcd/s5p_lcd/lcd_power
+    chown radio radio /sys/class/aclset/switch_aclset/aclset_file_cmd
+    chown radio radio /sys/class/mdnieset_ui/switch_mdnieset_ui/mdnieset_ui_file_cmd
+    chown radio radio /sys/class/mdnieset_outdoor/switch_mdnieset_outdoor/mdnieset_outdoor_file_cmd
+
+# allow system to modify cpufreq control files
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown root system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
+# GPS sysfs paths
+    chown gps system /sys/class/sec/gps/GPS_PWR_EN/value
+    chmod 660 /sys/class/sec/gps/GPS_PWR_EN/value
+    chown gps system /sys/class/sec/gps/GPS_nRST/value
+    chmod 660 /sys/class/sec/gps/GPS_nRST/value
+
 # 3D init
 service pvrsrvinit /vendor/bin/pvrsrvinit
     class core
     user root
     group root
     oneshot
-
-service venturi-ril-daemon /system/bin/rild
-    class core
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    user root
-    group radio cache inet misc audio sdcard_rw log
 
 service dhcpcd_wlan0 /system/bin/dhcpcd -BKA
     disabled
@@ -179,6 +175,13 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     disabled
     oneshot
     keycodes 114 115 116
+
+service gpsd /system/vendor/bin/gpsd -c /vendor/etc/gps.xml
+#    class late_start
+    class main
+    socket gps seqpacket 0660 gps system
+    user gps
+    group system inet
 
 service orientationd /system/vendor/bin/orientationd
     class late_start

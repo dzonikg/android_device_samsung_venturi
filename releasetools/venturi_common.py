@@ -196,32 +196,12 @@ def DumpInfoDict(d):
   for k, v in sorted(d.items()):
     print "%-25s = (%s) %s" % (k, type(v).__name__, v)
 
-def BuildBootableImage(sourcedir, fs_config_file):
-  """Take a kernel from the input (in 'sourcedir'), and copy it as
-  a boot image.  Return the image data."""
-
-  img = open(os.path.join(sourcedir, "kernel"), "rb")
-  data = img.read()
-  img.close()
-
-  return data
-
-
 def GetBootableImage(name, prebuilt_name, unpack_dir, tree_subdir):
   """Return a File object (with name 'name') with the desired bootable
-  image.  Look for it in 'unpack_dir'/BOOTABLE_IMAGES under the name
-  'prebuilt_name', otherwise construct it from the source files in
-  'unpack_dir'/'tree_subdir'."""
+  image (the kernel).
+  """
 
-  prebuilt_path = os.path.join(unpack_dir, "BOOTABLE_IMAGES", prebuilt_name)
-  if os.path.exists(prebuilt_path):
-    print "using prebuilt %s..." % (prebuilt_name,)
-    return File.FromLocalFile(name, prebuilt_path)
-  else:
-    print "building image from target_files %s..." % (tree_subdir,)
-    fs_config = "META/" + tree_subdir.lower() + "_filesystem_config.txt"
-    return File(name, BuildBootableImage(os.path.join(unpack_dir, tree_subdir),
-                                         os.path.join(unpack_dir, fs_config)))
+  return File(name, open(os.path.join(sourcedir, "kernel"), "rb").read())
 
 
 def UnzipTemp(filename, pattern=None):

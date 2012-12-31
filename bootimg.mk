@@ -1,11 +1,16 @@
 LOCAL_PATH := $(call my-dir)
 
-# Ramdisk is required to build kernel
-TARGET_KERNEL_BINARIES : $(recovery_ramdisk) $(INSTALLED_RAMDISK_TARGET)
+# Gzip within gzip is unnecessary and slow
+uncompressed_ramdisk := $(PRODUCT_OUT)/ramdisk.cpio
+$(uncompressed_ramdisk): $(INSTALLED_RAMDISK_TARGET)
+	zcat $< > $@
+
+# Ramdisk and recovery are required to build kernel
+TARGET_KERNEL_BINARIES : $(recovery_ramdisk) $(uncompressed_ramdisk)
 
 $(INSTALLED_BOOTIMAGE_TARGET): $(INSTALLED_KERNEL_TARGET) | $(ACP)
 	$(call pretty,"Boot image: $@")
-	$(ACP) $(INSTALLED_KERNEL_TARGET) $@
+	$(hide) $(ACP) $(INSTALLED_KERNEL_TARGET) $@
 
 $(INSTALLED_RECOVERYIMAGE_TARGET): $(INSTALLED_BOOTIMAGE_TARGET)
-	$(ACP) $(INSTALLED_BOOTIMAGE_TARGET) $@
+	$(hide) $(ACP) $(INSTALLED_BOOTIMAGE_TARGET) $@

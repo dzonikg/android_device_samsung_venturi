@@ -6,18 +6,16 @@ on init
     export LD_LIBRARY_PATH /vendor/lib:/system/lib
     export ANDROID_ROOT /system
     export ANDROID_DATA /data
-    export EXTERNAL_STORAGE /sdcard
+    export EXTERNAL_STORAGE /storage/sdcard0
 
     symlink /system/etc /etc
 
     mkdir /sdcard
-    mkdir /preload
     mkdir /system
     mkdir /data
     mkdir /cache
     mkdir /efs
     mkdir /tmp
-    mkdir /dbdata
 
     mkdir /mnt 0775 root root
 
@@ -26,7 +24,6 @@ on fs
     mount ext4 /dev/block/mmcblk0p13 /system wait ro
 
 on boot
-
     ifup lo
     hostname localhost
     domainname localdomain
@@ -36,7 +33,7 @@ on boot
 service ueventd /sbin/ueventd
     critical
 
-service console /system/bin/sh
+service console /sbin/sh
     console
 
 # adbd is controlled by the persist.service.adb.enable system property
@@ -44,11 +41,9 @@ service adbd /sbin/adbd
 #    disabled
 
 service playlpm /system/bin/playlpm
-    user root
     oneshot
 
 service lpmkey /system/bin/charging_mode
-    user root
     oneshot
 
 on property:persist.service.adb.enable=1

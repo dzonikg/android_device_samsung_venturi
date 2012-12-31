@@ -36,10 +36,7 @@ mkdir -p ../../../vendor/$VENDOR/$DEVICE
 
 # Live wallpaper packages and Themes
 PRODUCT_PACKAGES := \\
-    LiveWallpapers \\
     LiveWallpapersPicker \\
-    MagicSmokeWallpapers \\
-    VisualizationWallpapers \\
     librs_jni
 
 # Publish that we support the live wallpaper feature.

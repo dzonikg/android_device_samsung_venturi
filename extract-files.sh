@@ -4,7 +4,7 @@ VENDOR=samsung
 DEVICE=venturi
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 
-rm -rf ../../../vendor/$MANUFACTURER/$DEVICE/*
+rm -rf ../../../vendor/$VENDOR/$DEVICE/*
 mkdir -p $BASE
 
 if [ -f "$1" ]; then
