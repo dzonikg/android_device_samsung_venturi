@@ -55,7 +55,7 @@ BOARD_KERNEL_CMDLINE := console=ttyFIQ0,115200 init=/init no_console_suspend
 TARGET_RECOVERY_PRE_COMMAND := "echo 1 > /cache/.startrecovery; sync;"
 TARGET_RECOVERY_INITRC := device/samsung/venturi/recovery.rc
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
-BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/venturi/recovery/graphics.c
+BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/venturi/graphics.c
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_OTA_ASSERT_DEVICE := venturi,YP-G70,venturi_usa
 
