@@ -41,14 +41,8 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
 	audio.primary.s5pc110 \
-	audio.a2dp.default \
-	audio.usb.default \
 	hwcomposer.s5pc110 \
-	power.s5pc110 \
-#	libaudiohw_legacy \
-#	libhardware_legacy \
-#	libaudioutils \
-#	libtinyalsa \
+	power.s5pc110
 
 PRODUCT_AAPT_CONFIG := normal hdpi
 PRODUCT_AAPT_PREF_CONFIG := hdpi
@@ -67,39 +61,11 @@ PRODUCT_PACKAGES := \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
-	hardware/samsung/exynos3/s5pc110/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
 	device/samsung/venturi/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/venturi/media_codecs.xml:system/etc/media_codecs.xml
 
-# These are the OpenMAX IL modules
-PRODUCT_PACKAGES += \
-	libSEC_OMX_Core \
-	libOMX.SEC.AVC.Decoder \
-	libOMX.SEC.M4V.Decoder \
-	libOMX.SEC.M4V.Encoder \
-	libOMX.SEC.AVC.Encoder
-
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi/audio_policy.conf:system/etc/audio_policy.conf
-
-PRODUCT_COPY_FILES += \
-	device/samsung/venturi/alsa-lib/src/conf/alsa.conf:system/usr/share/alsa/alsa.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/dsnoop.conf:system/usr/share/alsa/pcm/dsnoop.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/modem.conf:system/usr/share/alsa/pcm/modem.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/dpl.conf:system/usr/share/alsa/pcm/dpl.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/default.conf:system/usr/share/alsa/pcm/default.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/surround51.conf:system/usr/share/alsa/pcm/surround51.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/surround41.conf:system/usr/share/alsa/pcm/surround41.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/surround50.conf:system/usr/share/alsa/pcm/surround50.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/dmix.conf:system/usr/share/alsa/pcm/dmix.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/center_lfe.conf:system/usr/share/alsa/pcm/center_lfe.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/surround40.conf:system/usr/share/alsa/pcm/surround40.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/side.conf:system/usr/share/alsa/pcm/side.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/iec958.conf:system/usr/share/alsa/pcm/iec958.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/rear.conf:system/usr/share/alsa/pcm/rear.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/surround71.conf:system/usr/share/alsa/pcm/surround71.conf \
-	device/samsung/venturi/alsa-lib/src/conf/pcm/front.conf:system/usr/share/alsa/pcm/front.conf \
-	device/samsung/venturi/alsa-lib/src/conf/cards/aliases.conf:system/usr/share/alsa/cards/aliases.conf
 
 # Libs
 PRODUCT_PACKAGES += \
