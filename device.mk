@@ -36,12 +36,12 @@ PRODUCT_COPY_FILES += \
 	device/samsung/venturi/egl.cfg:system/lib/egl/egl.cfg \
 	device/samsung/venturi/gps.conf:system/etc/gps.conf \
 	device/samsung/venturi/main.conf:system/etc/bluetooth/main.conf \
-	device/samsung/venturi/tinyalsa-audio.xml:system/etc/tinyalsa-audio.xml \
 	device/samsung/venturi/vold.fstab:system/etc/vold.fstab \
 	device/samsung/venturi/wifi.conf:system/etc/wifi/wifi.conf
 
 PRODUCT_PACKAGES += \
 	audio.primary.s5pc110 \
+	audio_policy.s5pc110 \
 	audio.a2dp.default \
 	audio.usb.default \
 	hwcomposer.s5pc110 \
