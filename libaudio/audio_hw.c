@@ -440,7 +440,7 @@ int audio_hw_open(const hw_module_t *module, const char *name,
 	dev = &(tinyalsa_audio_device->device);
 
 	dev->common.tag = HARDWARE_DEVICE_TAG;
-	dev->common.version = AUDIO_DEVICE_API_VERSION_1_0;
+	dev->common.version = AUDIO_DEVICE_API_VERSION_CURRENT;
 	dev->common.module = (struct hw_module_t *) module;
 	dev->common.close = audio_hw_close;
 
