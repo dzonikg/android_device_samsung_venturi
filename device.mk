@@ -15,6 +15,7 @@
 # These is the hardware-specific overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
+DEVICE_PACKAGE_OVERLAYS := device/samsung/venturi/overlay
 
 # Inherit our vendor files
 $(call inherit-product-if-exists, vendor/samsung/venturi/venturi-vendor.mk)
@@ -32,15 +33,17 @@ PRODUCT_COPY_FILES += \
 
 # These are the hardware-specific configuration files
 PRODUCT_COPY_FILES += \
-	device/samsung/venturi/asound.conf:system/etc/asound.conf \
 	device/samsung/venturi/egl.cfg:system/lib/egl/egl.cfg \
 	device/samsung/venturi/gps.conf:system/etc/gps.conf \
 	device/samsung/venturi/main.conf:system/etc/bluetooth/main.conf \
+	device/samsung/venturi/tinyalsa-audio.xml:system/etc/tinyalsa-audio.xml \
 	device/samsung/venturi/vold.fstab:system/etc/vold.fstab \
 	device/samsung/venturi/wifi.conf:system/etc/wifi/wifi.conf
 
 PRODUCT_PACKAGES += \
 	audio.primary.s5pc110 \
+	audio.a2dp.default \
+	audio.usb.default \
 	hwcomposer.s5pc110 \
 	power.s5pc110
 
@@ -55,7 +58,7 @@ PRODUCT_COPY_FILES += \
 	device/samsung/venturi/cytma340_input.kl:system/usr/keylayout/cytma340_input.kl
 
 # Generated kcm keymaps
-PRODUCT_PACKAGES := \
+PRODUCT_PACKAGES += \
        cypress-touchkey.kcm \
        s3c-keypad.kcm
 
@@ -94,21 +97,20 @@ PRODUCT_COPY_FILES += \
 	frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
 	frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
 	frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+	frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
 # The OpenGL ES API level that is natively supported by this device.
 # This is a 16.16 fixed point number
-PRODUCT_PROPERTY_OVERRIDES := \
-    ro.opengles.version=131072
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=131072 \
+    hwui.render_dirty_regions=false
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
-       wifi.supplicant_scan_interval=15 \
-       dalvik.vm.heapsize=128m
+       wifi.supplicant_scan_interval=15
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -126,7 +128,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # We have sacrificed /cache for a larger /system, so it's not large enough for dalvik cache
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dexopt-data-only=1
+    dalvik.vm.dexopt-data-only=1 \
+    dalvik.vm.heapsize=128m
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise

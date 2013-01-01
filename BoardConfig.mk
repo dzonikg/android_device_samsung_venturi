@@ -36,6 +36,7 @@ TARGET_GLOBAL_CPPFLAGS       += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
 TARGET_NO_BOOTLOADER         := true
 TARGET_NO_RADIOIMAGE         := true
 
+TARGET_SOC                   := s5pc110
 TARGET_BOARD_PLATFORM        := s5pc110
 TARGET_BOARD_PLATFORM_GPU    := POWERVR_SGX540_120
 TARGET_BOOTLOADER_BOARD_NAME := s5pc110
@@ -113,6 +114,4 @@ BOARD_USE_LEGACY_TOUCHSCREEN := true
 BOARD_HAVE_FM_RADIO          := true
 BOARD_FM_DEVICE              := si4709
 
-# Audio
-#BOARD_USES_AUDIO_LEGACY     := true
-#TARGET_PROVIDES_LIBAUDIO    := true
+WITH_SEC_OMX                 := true
