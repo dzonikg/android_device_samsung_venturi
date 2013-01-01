@@ -41,6 +41,9 @@ on fs
     mount j4fs /dev/block/mmcblk0p9 /mnt/.lfs
     insmod /lib/modules/param.ko
 
+# Reset param values
+    write /proc/param/debug 1
+
 on post-fs
     mount rootfs rootfs / ro remount
 
