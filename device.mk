@@ -72,7 +72,7 @@ PRODUCT_COPY_FILES += \
 
 # Libs
 PRODUCT_PACKAGES += \
-	libcamera \
+	camera.s5pc110 \
 	libs3cjpeg \
 	libstagefrighthw \
 	Torch
