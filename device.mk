@@ -44,6 +44,7 @@ PRODUCT_PACKAGES += \
 	audio_policy.s5pc110 \
 	audio.a2dp.default \
 	audio.usb.default \
+	camera.s5pc110 \
 	hwcomposer.s5pc110 \
 	power.s5pc110
 
@@ -64,27 +65,30 @@ PRODUCT_PACKAGES += \
 
 # These are the OpenMAX IL configuration files
 PRODUCT_COPY_FILES += \
+	hardware/samsung/exynos3/s5pc110/sec_mm/sec_omx/sec_omx_core/secomxregistry:system/etc/secomxregistry \
 	device/samsung/venturi/media_profiles.xml:system/etc/media_profiles.xml \
 	device/samsung/venturi/media_codecs.xml:system/etc/media_codecs.xml
+
+# These are the OpenMAX IL modules
+PRODUCT_PACKAGES += \
+	libSEC_OMX_Core \
+	libOMX.SEC.AVC.Decoder \
+	libOMX.SEC.M4V.Decoder \
+	libOMX.SEC.M4V.Encoder \
+	libOMX.SEC.AVC.Encoder
 
 PRODUCT_COPY_FILES += \
 	device/samsung/venturi/audio_policy.conf:system/etc/audio_policy.conf
 
 # Libs
 PRODUCT_PACKAGES += \
-	camera.s5pc110 \
 	libs3cjpeg \
 	libstagefrighthw \
 	Torch
-#	tvouthack \
 
 # Bluetooth MAC Address
 PRODUCT_PACKAGES += \
 	bdaddr_read
-
-# Device-specific packages
-PRODUCT_PACKAGES += \
-	SamsungServiceMode
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -110,7 +114,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
        wifi.interface=wlan0 \
-       wifi.supplicant_scan_interval=15
+       wifi.supplicant_scan_interval=30
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector

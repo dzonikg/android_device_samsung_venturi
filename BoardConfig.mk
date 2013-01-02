@@ -28,6 +28,7 @@ BOARD_USES_LIBSECRIL_STUB    := true
 # Platform
 TARGET_CPU_ABI               := armeabi-v7a
 TARGET_CPU_ABI2              := armeabi
+TARGET_ARCH                  := arm
 TARGET_ARCH_VARIANT          := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER   := true
 TARGET_GLOBAL_CFLAGS         += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
@@ -52,7 +53,6 @@ BOARD_CUSTOM_BOOTIMG_MK      := device/samsung/venturi/bootimg.mk
 # Recovery
 TARGET_RECOVERY_PRE_COMMAND  := "echo 1 > /cache/.startrecovery; sync;"
 TARGET_RECOVERY_INITRC       := device/samsung/venturi/recovery.rc
-#TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_CUSTOM_GRAPHICS        := ../../../device/samsung/venturi/graphics.c
 BOARD_HAS_NO_SELECT_BUTTON   := true
 TARGET_OTA_ASSERT_DEVICE     := venturi,YP-G70,venturi_usa
@@ -91,6 +91,7 @@ BOARD_HAVE_BLUETOOTH_BCM     := true
 # Camera
 ifeq ($(USE_CAMERA_STUB),false)
 BOARD_CAMERA_LIBRARIES       := libcamera
+BOARD_CAMERA_HAVE_ISO        := true
 endif
 
 # Video Devices
