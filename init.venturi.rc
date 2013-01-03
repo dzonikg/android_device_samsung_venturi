@@ -3,8 +3,8 @@ import /init.venturi.usb.rc
 on init
     loglevel 9
 
-    export EXTERNAL_STORAGE /storage/sdcard0
-    export SECONDARY_STORAGE /storage/sdcard1
+    export EXTERNAL_STORAGE /storage/sdcard1
+    export SECONDARY_STORAGE /storage/sdcard0
 
     mkdir /storage 0050 system sdcard_r
     mkdir /storage/sdcard0 0000 system system

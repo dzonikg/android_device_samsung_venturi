@@ -1,9 +1,8 @@
 # Inherit some common CM stuff.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base.mk)
 
-# We are not actually a phone, so we do not support SMS, nor
-# do we have space on /system for a bunch of live wallpapers
-$(call inherit-product, vendor/cm/config/common_mini_tablet_wifionly.mk)
+# We don't have space on /system for a bunch of live wallpapers
+$(call inherit-product, vendor/cm/config/common_mini_phone.mk)
 
 # Inherit device configuration.
 $(call inherit-product, device/samsung/venturi/full_venturi.mk)
