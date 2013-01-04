@@ -26,7 +26,7 @@ ro.bt.bdaddr_path=/data/bdaddr
 # ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1
 
 # Change to 0 to enable softkeys, 1 to disable
-qemu.hw.mainkeys=1
+qemu.hw.mainkeys=0
 
 # Defaults to Mass Storage. You can change to MTP
 persist.sys.usb.config=mass_storage
