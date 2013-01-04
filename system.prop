@@ -1,17 +1,12 @@
 #
 # system.prop for venturi
 #
-
 rild.libpath=/system/lib/libsec-ril-apalone.so
 rild.libargs=-d /dev/ttyS0
 ro.sf.lcd_density=240
 
-# Mount the internal SD card, too
+# Mount the external SD card, too
 ro.additionalmounts=/storage/sdcard1
-
-# Allow people to exchange sdcard and emmc mountpoints from CMParts
-ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1
-persist.sys.usb.config=mass_storage
 
 # Sound
 media.stagefright.enable-player=false
@@ -20,5 +15,18 @@ media.stagefright.enable-scan=false
 media.stagefright.enable-http=true
 media.stagefright.enable-rtsp=false
 
-# Bluetooth
+# Bluetooth MAC path
 ro.bt.bdaddr_path=/data/bdaddr
+
+####################################
+## Edit the next three properties ##
+####################################
+
+# Uncomment to switch internal and external storage
+# ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1
+
+# Change to 0 to enable softkeys, 1 to disable
+qemu.hw.mainkeys=1
+
+# Defaults to Mass Storage. You can change to MTP
+persist.sys.usb.config=mass_storage
