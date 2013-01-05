@@ -3,7 +3,6 @@
 #
 rild.libpath=/system/lib/libsec-ril-apalone.so
 rild.libargs=-d /dev/ttyS0
-ro.sf.lcd_density=240
 
 # Mount the external SD card, too
 ro.additionalmounts=/storage/sdcard1
@@ -18,9 +17,9 @@ media.stagefright.enable-rtsp=false
 # Bluetooth MAC path
 ro.bt.bdaddr_path=/data/bdaddr
 
-####################################
-## Edit the next three properties ##
-####################################
+#########################################
+## You can tweak the next 4 properties ##
+#########################################
 
 # Uncomment to switch internal and external storage
 # ro.vold.switchablepair=/storage/sdcard0,/storage/sdcard1
@@ -28,5 +27,8 @@ ro.bt.bdaddr_path=/data/bdaddr
 # Change to 0 to enable softkeys, 1 to disable
 qemu.hw.mainkeys=0
 
-# Defaults to Mass Storage. You can change to MTP
+# Defaults to Mass Storage. You can change to mtp
 persist.sys.usb.config=mass_storage
+
+# LCD density (240 is default)
+ro.sf.lcd_density=240
