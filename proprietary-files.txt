@@ -1,10 +1,8 @@
 # Camera
-bin/tvoutserver
 cameradata/datapattern_420sp.yuv
 cameradata/datapattern_front_420sp.yuv
 lib/libActionShot.so
 lib/libcamera.so
-lib/libs3cjpeg.so
 lib/libarccamera.so
 lib/libcamera_client.so
 lib/libcamerafirmwarejni.so
@@ -16,12 +14,6 @@ lib/libPlusMe.so
 lib/libseccamera.so
 lib/libseccameraadaptor.so
 lib/libsecjpegencoder.so
-lib/libtvout_jni.so
-lib/libtvout.so
-lib/lib_tvoutengine.so
-lib/libtvoutfimc.so
-lib/libtvouthdmi.so
-lib/libtvoutservice.so
 firmware/CE147F00.bin
 firmware/CE147F01.bin
 firmware/CE147F02.bin
