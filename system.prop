@@ -1,5 +1,5 @@
 #
-# system.prop for venturi
+# system.prop for venturi Dzonitest
 #
 rild.libpath=/system/lib/libsec-ril-apalone.so
 rild.libargs=-d /dev/ttyS0
